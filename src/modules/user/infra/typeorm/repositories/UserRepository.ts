@@ -11,6 +11,11 @@ export default class UserRepository implements IUserRepository {
   constructor() {
     this.repository = getRepository(User);
   }
+  async update(id: string, user: IUserDTO): Promise<void> {
+    const updateUser = this.repository.findOne(id);
+
+    await this.repository.update(id, user);
+  }
 
   save(user: IUserDTO): Promise<IUserDTO> {
     const createdUser = this.repository.create(user);
@@ -19,5 +24,13 @@ export default class UserRepository implements IUserRepository {
 
   findByEmail(email: string): Promise<User | undefined> {
     return this.repository.findOne({ email });
+  }
+
+  listUser(): Promise<IUserDTO[]> {
+    return this.repository.find();
+  }
+
+  findById(id: string): Promise<IUserDTO | undefined> {
+    return this.repository.findOne(id);
   }
 }
