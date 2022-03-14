@@ -1,27 +1,15 @@
 import { Column, Entity, PrimaryColumn } from 'typeorm';
 import { v4 as uuid } from 'uuid';
-
 import { DefaultEntity } from '../../../../../shared/infra/typeorm/entities/DefaultEntity';
+import ICategoryDTO from '../../../dtos/ICategoryDTO';
 
-@Entity('user')
-export default class User extends DefaultEntity {
-  @PrimaryColumn()
+@Entity('category')
+export default class Category extends DefaultEntity implements ICategoryDTO {
+  @PrimaryColumn({ name: 'id_category' })
   readonly id: string;
 
   @Column()
   name: string;
-
-  @Column()
-  email: string;
-
-  @Column({ name: 'password' })
-  password: string;
-
-  @Column({ name: 'is_active' })
-  isActive: boolean;
-
-  @Column()
-  admin: boolean;
 
   constructor() {
     super();

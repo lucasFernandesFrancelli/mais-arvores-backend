@@ -5,10 +5,16 @@ import { BcryptEncoderProvider } from 'shared/providers/EncoderProvider/implemen
 import { JwtTokenManagerProvider } from 'shared/providers/TokenManagerProvider/implementations/JwtTokenManagerProvider';
 import { ITokenManagerProvider } from 'shared/providers/TokenManagerProvider/ITokenManagerProvider';
 import { container } from 'tsyringe';
+import CategoryRepository from '../../modules/category/infra/typeorm/repositories/CategoryRepository';
+import { ICategoryRepository } from '../../modules/category/repositories/ICategoryRepository';
 
 container.registerSingleton<IUserRepository>('UserRepository', UserRepository);
+container.registerSingleton<ICategoryRepository>(
+  'CategoryRepository',
+  CategoryRepository,
+);
 
-//Providers
+// Providers
 
 container.registerInstance<IEncoderProvider>(
   'EncoderProvider',

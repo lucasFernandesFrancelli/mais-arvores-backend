@@ -1,10 +1,9 @@
 import { inject, injectable } from 'tsyringe';
-import { sign } from 'jsonwebtoken';
 
+import { ITokenManagerProvider } from 'shared/providers/TokenManagerProvider/ITokenManagerProvider';
 import { IUserRepository } from '../repositories/IUserRepository';
 import { AppError } from '../../../shared/errors/AppError';
 import { IEncoderProvider } from '../../../shared/providers/EncoderProvider/IEncoderProvider';
-import { ITokenManagerProvider } from 'shared/providers/TokenManagerProvider/ITokenManagerProvider';
 
 interface IAuthenticateRequest {
   email: string;

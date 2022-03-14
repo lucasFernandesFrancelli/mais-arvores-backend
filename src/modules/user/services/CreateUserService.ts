@@ -1,9 +1,9 @@
 import { inject, injectable } from 'tsyringe';
 
+import { IEncoderProvider } from 'shared/providers/EncoderProvider/IEncoderProvider';
 import IUserDTO from '../dtos/IUserDTO';
 import { IUserRepository } from '../repositories/IUserRepository';
 import { AppError } from '../../../shared/errors/AppError';
-import { IEncoderProvider } from 'shared/providers/EncoderProvider/IEncoderProvider';
 
 type ICreateUserResponse = Omit<IUserDTO, 'password'> & {
   password?: string;
@@ -22,7 +22,7 @@ export default class CreateUserService {
     const user = await this.userRepository.findByEmail(data.email);
 
     if (user) {
-      throw new AppError('User already exists');
+      throw new AppError('Category already exists');
     }
 
     const passwordHash = await this.encoderProvider.encode(data.password);
