@@ -22,7 +22,7 @@ export default class CreateUserService {
     const user = await this.userRepository.findByEmail(data.email);
 
     if (user) {
-      throw new AppError('Category already exists');
+      throw new AppError('User already exists');
     }
 
     const passwordHash = await this.encoderProvider.encode(data.password);

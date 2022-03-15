@@ -3,6 +3,7 @@ import { celebrate, Segments } from 'celebrate';
 import CategoryController from '../controller/CategoryController';
 import createCategorySchema from '../../../schemas/createCategory.schema';
 import { ensureAuthenticated } from '../../../../user/middlewares/ensureAuthenticated';
+import { ensureAdmin } from '../../../../user/middlewares/ensureAdmin';
 
 const categoryRoutes = Router();
 
@@ -12,6 +13,7 @@ categoryRoutes.post(
   '',
   celebrate({ [Segments.BODY]: createCategorySchema }),
   ensureAuthenticated,
+  ensureAdmin,
   categoryController.create,
 );
 

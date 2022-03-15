@@ -1,11 +1,14 @@
+import jwt from 'jsonwebtoken';
+import { injectable } from 'tsyringe';
 import {
   IPayload,
   ISignOptions,
   ITokenManagerProvider,
 } from '../ITokenManagerProvider';
 
-import jwt from 'jsonwebtoken';
-import { injectable } from 'tsyringe';
+interface ITokenPayload {
+  sub: string;
+}
 
 @injectable()
 export class JwtTokenManagerProvider implements ITokenManagerProvider {
@@ -20,9 +23,9 @@ export class JwtTokenManagerProvider implements ITokenManagerProvider {
     });
   }
 
-  async verify(token: string, secret: string): Promise<IPayload | Error> {
+  async verify(token: string, secret: string): Promise<ITokenPayload> {
     try {
-      return jwt.verify(token, secret);
+      return jwt.verify(token, secret) as ITokenPayload;
     } catch {
       throw new Error('Invalid JWT Token');
     }
