@@ -32,4 +32,8 @@ export default class CategoryRepository implements ICategoryRepository {
   async update(id: string, category: ICategoryDTO): Promise<void> {
     await this.repository.update(id, category);
   }
+
+  async delete(id: string): Promise<void> {
+    await this.repository.softDelete(id);
+  }
 }

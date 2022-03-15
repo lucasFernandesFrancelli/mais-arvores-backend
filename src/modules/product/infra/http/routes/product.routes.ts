@@ -3,7 +3,7 @@ import { celebrate, Segments } from 'celebrate';
 import ProductController from '../controller/ProductController';
 import { ensureAdmin } from '../../../../user/middlewares/ensureAdmin';
 import { ensureAuthenticated } from '../../../../user/middlewares/ensureAuthenticated';
-import ProductSchema from '../../../schema/Product.schema';
+import productSchema from '../../../schema/product.schema';
 
 const productRoutes = Router();
 
@@ -11,7 +11,7 @@ const productController = new ProductController();
 
 productRoutes.post(
   '',
-  celebrate({ [Segments.BODY]: ProductSchema }),
+  celebrate({ [Segments.BODY]: productSchema }),
   ensureAuthenticated,
   ensureAdmin,
   productController.create,
@@ -19,7 +19,7 @@ productRoutes.post(
 
 productRoutes.put(
   '/:id',
-  celebrate({ [Segments.BODY]: ProductSchema }),
+  celebrate({ [Segments.BODY]: productSchema }),
   ensureAuthenticated,
   ensureAdmin,
   productController.update,

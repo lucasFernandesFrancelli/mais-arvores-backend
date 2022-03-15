@@ -6,4 +6,5 @@ export interface ICategoryRepository {
   listCategory(): Promise<ICategoryDTO[]>;
   findById(id: string): Promise<ICategoryDTO | undefined>;
   update(id: string, category: ICategoryDTO): Promise<void>;
+  delete(id: string): Promise<void>;
 }

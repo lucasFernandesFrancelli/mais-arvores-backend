@@ -4,19 +4,19 @@ import ICategoryDTO from '../dtos/ICategoryDTO';
 import { AppError } from '../../../shared/errors/AppError';
 
 @injectable()
-export default class CreateCategoryService {
+export class UpdateCategoryService {
   constructor(
     @inject('CategoryRepository')
     private categoryRepository: ICategoryRepository,
   ) {}
 
-  async execute(data: ICategoryDTO): Promise<ICategoryDTO> {
-    const category = await this.categoryRepository.findByName(data.name);
+  async execute(id: string, category: ICategoryDTO): Promise<void> {
+    const foundCategory = await this.categoryRepository.findById(id);
 
-    if (category) {
-      throw new AppError('Category already exists');
+    if (!foundCategory) {
+      throw new AppError('Category not found');
     }
 
-    return this.categoryRepository.save(data);
+    await this.categoryRepository.update(id, category);
   }
 }

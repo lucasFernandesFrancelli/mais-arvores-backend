@@ -1,10 +1,10 @@
 import Joi from 'joi';
 
-const createCategorySchema = Joi.object({
+const categorySchema = Joi.object({
   name: Joi.string().required(),
 });
 
-export default createCategorySchema.options({
+export default categorySchema.options({
   abortEarly: false,
   allowUnknown: true,
   stripUnknown: true,
