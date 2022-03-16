@@ -1,38 +1,62 @@
 import { MigrationInterface, QueryRunner, Table } from 'typeorm';
 
-export class createTableProduct1647351658483 implements MigrationInterface {
+export class createTableUserDetail1647434575034 implements MigrationInterface {
   public async up(queryRunner: QueryRunner): Promise<void> {
     await queryRunner.createTable(
       new Table({
-        name: 'product',
+        name: 'user_detail',
         columns: [
           {
-            name: 'id',
+            name: 'user_id',
             type: 'varchar',
             isPrimary: true,
             length: '36',
           },
           {
-            name: 'description',
+            name: 'first_name',
             type: 'varchar',
           },
           {
-            name: 'price',
-            type: 'float',
+            name: 'cpf',
+            type: 'varchar',
+            isUnique: true,
           },
           {
-            name: 'image',
+            name: 'last_name',
             type: 'varchar',
           },
           {
-            name: 'category_id',
+            name: 'register_number',
             type: 'varchar',
-            length: '36',
           },
           {
-            name: 'user_id',
+            name: 'street',
             type: 'varchar',
-            length: '36',
+          },
+          {
+            name: 'neighborhood',
+            type: 'varchar',
+          },
+          {
+            name: 'complement',
+            type: 'varchar',
+          },
+          {
+            name: 'zip_code',
+            type: 'varchar',
+          },
+          {
+            name: 'city',
+            type: 'varchar',
+          },
+          {
+            name: 'state',
+            type: 'char',
+            length: '2',
+          },
+          {
+            name: 'number',
+            type: 'integer',
           },
           {
             name: 'created_at',
@@ -53,13 +77,7 @@ export class createTableProduct1647351658483 implements MigrationInterface {
         ],
         foreignKeys: [
           {
-            name: 'product_category_FK',
-            referencedTableName: 'category',
-            columnNames: ['category_id'],
-            referencedColumnNames: ['id'],
-          },
-          {
-            name: 'product_user_FK',
+            name: 'user_detail_user_FK',
             referencedTableName: 'user',
             columnNames: ['user_id'],
             referencedColumnNames: ['id'],
@@ -70,6 +88,6 @@ export class createTableProduct1647351658483 implements MigrationInterface {
   }
 
   public async down(queryRunner: QueryRunner): Promise<void> {
-    await queryRunner.dropTable('product');
+    await queryRunner.dropTable('user_detail');
   }
 }

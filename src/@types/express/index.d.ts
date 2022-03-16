@@ -1,6 +1,12 @@
 declare namespace Express {
   // eslint-disable-next-line @typescript-eslint/naming-convention
   export interface Request {
-    userId: string | undefined;
+    token: {
+      sub: {
+        user: {
+          id: string;
+        };
+      };
+    };
   }
 }

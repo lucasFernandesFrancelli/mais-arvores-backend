@@ -10,12 +10,14 @@ export default class CategoryController {
   async create(request: Request, response: Response): Promise<void> {
     const data = request.body;
 
+    data.user = request.token.sub.user;
+
     const createCategoryService = container.resolve(CreateCategoryService);
 
     response.status(201).json(await createCategoryService.execute(data));
   }
 
-  async listCategory(request: Request, response: Response) {
+  async list(request: Request, response: Response) {
     const listCategoryService = container.resolve(ListCategoryService);
 
     response.json(await listCategoryService.execute());
@@ -32,6 +34,7 @@ export default class CategoryController {
   async update(request: Request, response: Response): Promise<void> {
     const { id } = request.params;
     const data = request.body;
+    data.user = request.token.sub.user;
 
     const updateCategoryService = container.resolve(UpdateCategoryService);
 

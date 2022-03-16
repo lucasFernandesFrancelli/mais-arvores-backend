@@ -19,10 +19,16 @@ export default class CreateUserService {
   ) {}
 
   async execute(data: IUserDTO): Promise<ICreateUserResponse> {
+    const username = await this.userRepository.findByUsername(data.username);
+
+    if (username) {
+      throw new AppError('username already in use');
+    }
+
     const user = await this.userRepository.findByEmail(data.email);
 
     if (user) {
-      throw new AppError('User already exists');
+      throw new AppError('email already registered');
     }
 
     const passwordHash = await this.encoderProvider.encode(data.password);

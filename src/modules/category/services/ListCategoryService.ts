@@ -10,6 +10,6 @@ export class ListCategoryService {
   ) {}
 
   async execute(): Promise<ICategoryDTO[]> {
-    return this.categoryRepository.listCategory();
+    return this.categoryRepository.list();
   }
 }

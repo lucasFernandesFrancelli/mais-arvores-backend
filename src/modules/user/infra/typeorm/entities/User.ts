@@ -9,7 +9,7 @@ export default class User extends DefaultEntity {
   readonly id: string;
 
   @Column()
-  name: string;
+  username: string;
 
   @Column()
   email: string;
@@ -21,7 +21,7 @@ export default class User extends DefaultEntity {
   isActive: boolean;
 
   @Column()
-  admin: boolean;
+  isAdmin: boolean;
 
   constructor() {
     super();

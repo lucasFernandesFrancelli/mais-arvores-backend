@@ -3,18 +3,23 @@ import { v4 as uuid } from 'uuid';
 import IProductDTO from '../../../dtos/IProductDTO';
 import { DefaultEntity } from '../../../../../shared/infra/typeorm/entities/DefaultEntity';
 import Category from '../../../../category/infra/typeorm/entities/Category';
+import User from '../../../../user/infra/typeorm/entities/User';
 
 @Entity('product')
 export default class Product extends DefaultEntity implements IProductDTO {
-  @PrimaryColumn({ name: 'id_product' })
+  @PrimaryColumn()
   id: string;
 
   @ManyToOne(() => Category, { eager: true })
-  @JoinColumn({ name: 'id_category' })
+  @JoinColumn({ name: 'category_id', referencedColumnName: 'id' })
   category: Category;
 
+  @ManyToOne(() => User, { eager: true })
+  @JoinColumn({ name: 'user_id', referencedColumnName: 'id' })
+  user: User;
+
   @Column()
-  name: string;
+  description: string;
 
   @Column()
   price: number;

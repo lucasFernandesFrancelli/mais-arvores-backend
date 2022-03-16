@@ -21,11 +21,11 @@ export default class CategoryRepository implements ICategoryRepository {
     return this.repository.findOne(id);
   }
 
-  findByName(name: string): Promise<ICategoryDTO | undefined> {
-    return this.repository.findOne({ name });
+  findByDescription(description: string): Promise<ICategoryDTO | undefined> {
+    return this.repository.findOne({ description });
   }
 
-  listCategory(): Promise<ICategoryDTO[]> {
+  list(): Promise<ICategoryDTO[]> {
     return this.repository.find();
   }
 

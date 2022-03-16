@@ -6,17 +6,19 @@ export async function ensureAdmin(
   response: Response,
   next: NextFunction,
 ) {
-  const { userId } = request;
+  const { id } = request.token.sub.user;
 
   const userRepository = new UserRepository();
 
-  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-  // @ts-ignore
-  const { admin } = await userRepository.findById(String(userId));
+  const user = await userRepository.findById(id);
 
-  if (admin) {
-    return next();
+  if (!user) {
+    return response.status(401).json({ error: 'Unauthorized' });
   }
 
-  return response.status(401).json({ error: 'Unauthorized' });
+  if (!user.admin) {
+    return response.status(401).json({ error: 'Unauthorized' });
+  }
+
+  return next();
 }

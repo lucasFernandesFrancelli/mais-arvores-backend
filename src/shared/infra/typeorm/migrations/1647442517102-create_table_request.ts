@@ -1,10 +1,10 @@
 import { MigrationInterface, QueryRunner, Table } from 'typeorm';
 
-export class createTableCategory1647265832005 implements MigrationInterface {
+export class createTableRequest1647442517102 implements MigrationInterface {
   public async up(queryRunner: QueryRunner): Promise<void> {
     await queryRunner.createTable(
       new Table({
-        name: 'category',
+        name: 'request',
         columns: [
           {
             name: 'id',
@@ -13,13 +13,27 @@ export class createTableCategory1647265832005 implements MigrationInterface {
             length: '36',
           },
           {
-            name: 'description',
-            type: 'varchar',
-          },
-          {
             name: 'user_id',
             type: 'varchar',
             length: '36',
+          },
+          {
+            name: 'payment_method_id',
+            type: 'varchar',
+            length: '36',
+          },
+          {
+            name: 'total',
+            type: 'float',
+          },
+          {
+            name: 'request_date',
+            type: 'timestamp',
+            default: 'now()',
+          },
+          {
+            name: 'delivery_rate',
+            type: 'float',
           },
           {
             name: 'created_at',
@@ -40,9 +54,15 @@ export class createTableCategory1647265832005 implements MigrationInterface {
         ],
         foreignKeys: [
           {
-            name: 'category_user_FK',
+            name: 'request_user_FK',
             referencedTableName: 'user',
             columnNames: ['user_id'],
+            referencedColumnNames: ['id'],
+          },
+          {
+            name: 'request_payment_method',
+            referencedTableName: 'payment_method',
+            columnNames: ['payment_method_id'],
             referencedColumnNames: ['id'],
           },
         ],
@@ -51,6 +71,7 @@ export class createTableCategory1647265832005 implements MigrationInterface {
   }
 
   public async down(queryRunner: QueryRunner): Promise<void> {
-    await queryRunner.dropTable('category');
+    await queryRunner.dropForeignKey('request', 'request_payment_method');
+    await queryRunner.dropForeignKey('request', 'request_user_FK');
   }
 }

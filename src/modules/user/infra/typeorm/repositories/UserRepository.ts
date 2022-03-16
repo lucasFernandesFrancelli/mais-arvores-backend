@@ -25,6 +25,10 @@ export default class UserRepository implements IUserRepository {
     return this.repository.findOne({ email });
   }
 
+  findByUsername(username: string): Promise<User | undefined> {
+    return this.repository.findOne({ username });
+  }
+
   listUser(): Promise<IUserDTO[]> {
     return this.repository.find();
   }

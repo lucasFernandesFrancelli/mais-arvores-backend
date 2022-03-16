@@ -25,7 +25,7 @@ categoryRoutes.put(
   categoryController.update,
 );
 
-categoryRoutes.get('', ensureAuthenticated, categoryController.listCategory);
+categoryRoutes.get('', ensureAuthenticated, categoryController.list);
 categoryRoutes.get('/:id', ensureAuthenticated, categoryController.findById);
 categoryRoutes.delete(
   '/:id',

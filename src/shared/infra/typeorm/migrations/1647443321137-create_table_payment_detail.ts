@@ -1,25 +1,26 @@
 import { MigrationInterface, QueryRunner, Table } from 'typeorm';
 
-export class createTableCategory1647265832005 implements MigrationInterface {
+export class createTablePaymentDetail1647443321137
+  implements MigrationInterface
+{
   public async up(queryRunner: QueryRunner): Promise<void> {
     await queryRunner.createTable(
       new Table({
-        name: 'category',
+        name: 'payment_detail',
         columns: [
           {
-            name: 'id',
+            name: 'request_id',
             type: 'varchar',
             isPrimary: true,
             length: '36',
           },
           {
-            name: 'description',
-            type: 'varchar',
+            name: 'change',
+            type: 'float',
           },
           {
-            name: 'user_id',
-            type: 'varchar',
-            length: '36',
+            name: 'provided',
+            type: 'float',
           },
           {
             name: 'created_at',
@@ -40,9 +41,9 @@ export class createTableCategory1647265832005 implements MigrationInterface {
         ],
         foreignKeys: [
           {
-            name: 'category_user_FK',
-            referencedTableName: 'user',
-            columnNames: ['user_id'],
+            name: 'payment_detail_request_FK',
+            referencedTableName: 'request',
+            columnNames: ['request_id'],
             referencedColumnNames: ['id'],
           },
         ],
@@ -51,6 +52,9 @@ export class createTableCategory1647265832005 implements MigrationInterface {
   }
 
   public async down(queryRunner: QueryRunner): Promise<void> {
-    await queryRunner.dropTable('category');
+    await queryRunner.dropForeignKey(
+      'payment_detail',
+      'payment_detail_request_FK',
+    );
   }
 }
