@@ -20,7 +20,7 @@ export default class User extends DefaultEntity {
   @Column({ name: 'is_active' })
   isActive: boolean;
 
-  @Column()
+  @Column({ name: 'is_admin' })
   isAdmin: boolean;
 
   constructor() {

@@ -10,7 +10,7 @@ export default class CategoryController {
   async create(request: Request, response: Response): Promise<void> {
     const data = request.body;
 
-    data.user = request.token.sub.user;
+    data.user = request.userId;
 
     const createCategoryService = container.resolve(CreateCategoryService);
 
@@ -34,7 +34,7 @@ export default class CategoryController {
   async update(request: Request, response: Response): Promise<void> {
     const { id } = request.params;
     const data = request.body;
-    data.user = request.token.sub.user;
+    // data.user = request.token.sub.user;
 
     const updateCategoryService = container.resolve(UpdateCategoryService);
 

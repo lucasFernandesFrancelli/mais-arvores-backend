@@ -6,7 +6,7 @@ import User from '../../../../user/infra/typeorm/entities/User';
 
 @Entity('category')
 export default class Category extends DefaultEntity implements ICategoryDTO {
-  @PrimaryColumn({ name: 'id_category' })
+  @PrimaryColumn()
   readonly id: string;
 
   @ManyToOne(() => User)

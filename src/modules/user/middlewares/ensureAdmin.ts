@@ -6,17 +6,17 @@ export async function ensureAdmin(
   response: Response,
   next: NextFunction,
 ) {
-  const { id } = request.token.sub.user;
+  const { userId } = request;
 
   const userRepository = new UserRepository();
 
-  const user = await userRepository.findById(id);
+  const user = await userRepository.findById(userId);
 
   if (!user) {
     return response.status(401).json({ error: 'Unauthorized' });
   }
 
-  if (!user.admin) {
+  if (!user.isAdmin) {
     return response.status(401).json({ error: 'Unauthorized' });
   }
 

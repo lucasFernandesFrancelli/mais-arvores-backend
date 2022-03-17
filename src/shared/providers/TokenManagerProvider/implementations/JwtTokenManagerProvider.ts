@@ -6,10 +6,6 @@ import {
   ITokenManagerProvider,
 } from '../ITokenManagerProvider';
 
-interface ITokenPayload {
-  sub: string;
-}
-
 @injectable()
 export class JwtTokenManagerProvider implements ITokenManagerProvider {
   async sign(
@@ -23,9 +19,9 @@ export class JwtTokenManagerProvider implements ITokenManagerProvider {
     });
   }
 
-  async verify(token: string, secret: string): Promise<ITokenPayload> {
+  async verify(token: string, secret: string): Promise<IPayload> {
     try {
-      return jwt.verify(token, secret) as ITokenPayload;
+      return jwt.verify(token, secret) as IPayload;
     } catch {
       throw new Error('Invalid JWT Token');
     }

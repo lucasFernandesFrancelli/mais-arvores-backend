@@ -1,6 +1,10 @@
 import { NextFunction, Request, Response } from 'express';
 import { JwtTokenManagerProvider } from '../../../shared/providers/TokenManagerProvider/implementations/JwtTokenManagerProvider';
 
+interface IPayload {
+  sub: string;
+}
+
 export async function ensureAuthenticated(
   request: Request,
   response: Response,
@@ -18,11 +22,12 @@ export async function ensureAuthenticated(
   // @ts-ignore
   const [, token] = authToken.split(' ');
 
-  const { sub } = await tokenManagerProvider.verify(
+  const { sub } = (await tokenManagerProvider.verify(
     token,
     '78a63fac36fe1c6b29093ed3c70a09f7',
-  );
+  )) as IPayload;
 
+  console.log(sub);
   request.userId = sub;
 
   return next();
