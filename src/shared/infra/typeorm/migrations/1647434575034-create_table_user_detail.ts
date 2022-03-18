@@ -40,6 +40,8 @@ export class createTableUserDetail1647434575034 implements MigrationInterface {
           {
             name: 'complement',
             type: 'varchar',
+            isNullable: true,
+            default: null,
           },
           {
             name: 'zip_code',

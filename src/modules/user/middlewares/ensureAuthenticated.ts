@@ -27,7 +27,6 @@ export async function ensureAuthenticated(
     '78a63fac36fe1c6b29093ed3c70a09f7',
   )) as IPayload;
 
-  console.log(sub);
   request.userId = sub;
 
   return next();
