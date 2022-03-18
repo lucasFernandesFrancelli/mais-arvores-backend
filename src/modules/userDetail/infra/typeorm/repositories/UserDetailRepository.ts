@@ -16,4 +16,8 @@ export class UserDetailRepository implements IUserDetailRepository {
     const createdUserDetail = this.repository.create(userDetail);
     return this.repository.save(createdUserDetail);
   }
+
+  list(): Promise<IUserDetailDTO[]> {
+    return this.repository.find();
+  }
 }

@@ -15,4 +15,6 @@ userDetailRoutes.post(
   userDetailController.create,
 );
 
+userDetailRoutes.get('', ensureAuthenticated, userDetailController.list);
+
 export { userDetailRoutes };

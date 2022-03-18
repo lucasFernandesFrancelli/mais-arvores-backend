@@ -35,7 +35,8 @@ export default class AuthenticateUserService {
     if (!passwordMatch) {
       throw new AppError('Email or password incorrect');
     }
-    const token = this.tokenManagerProvider.sign(
+
+    return this.tokenManagerProvider.sign(
       {},
       '78a63fac36fe1c6b29093ed3c70a09f7',
       {
@@ -43,7 +44,5 @@ export default class AuthenticateUserService {
         expiresIn: '1d',
       },
     );
-
-    return token;
   }
 }

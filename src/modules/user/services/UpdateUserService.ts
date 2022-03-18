@@ -1,5 +1,5 @@
-import { AppError } from 'shared/errors/AppError';
 import { inject, injectable } from 'tsyringe';
+import { AppError } from '../../../shared/errors/AppError';
 import IUserDTO from '../dtos/IUserDTO';
 import { IUserRepository } from '../repositories/IUserRepository';
 

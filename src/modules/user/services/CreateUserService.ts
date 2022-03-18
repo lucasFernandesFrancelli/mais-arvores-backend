@@ -5,10 +5,6 @@ import IUserDTO from '../dtos/IUserDTO';
 import { IUserRepository } from '../repositories/IUserRepository';
 import { AppError } from '../../../shared/errors/AppError';
 
-type ICreateUserResponse = Omit<IUserDTO, 'password'> & {
-  password?: string;
-};
-
 @injectable()
 export default class CreateUserService {
   constructor(
@@ -18,7 +14,7 @@ export default class CreateUserService {
     private encoderProvider: IEncoderProvider,
   ) {}
 
-  async execute(data: IUserDTO): Promise<ICreateUserResponse> {
+  async execute(data: IUserDTO): Promise<Partial<IUserDTO>> {
     const username = await this.userRepository.findByUsername(data.username);
 
     if (username) {
@@ -28,19 +24,16 @@ export default class CreateUserService {
     const user = await this.userRepository.findByEmail(data.email);
 
     if (user) {
-      throw new AppError('email already registered');
+      throw new AppError('email already in use');
     }
 
     const passwordHash = await this.encoderProvider.encode(data.password);
 
-    const createdUser = await this.userRepository.save({
+    const createdUser: Partial<IUserDTO> = await this.userRepository.save({
       ...data,
       password: passwordHash,
     });
 
-    return {
-      ...createdUser,
-      password: undefined,
-    };
+    return { ...createdUser, password: undefined };
   }
 }
