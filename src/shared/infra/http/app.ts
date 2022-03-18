@@ -9,9 +9,9 @@ import '../../container';
 import createConnection from '../typeorm';
 import { errorsHandler } from '../../handlers/ErrorsHandler';
 
-config({ silent: true });
-
 import { routes } from './routes';
+
+config({ silent: true });
 
 const app = express();
 

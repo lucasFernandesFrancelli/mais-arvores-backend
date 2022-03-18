@@ -1,7 +1,8 @@
 import { Column, Entity, JoinColumn, OneToOne } from 'typeorm';
 import { DefaultEntity } from '../../../../../shared/infra/typeorm/entities/DefaultEntity';
 import { IUserDetailDTO } from '../../../dtos/IUserDetailDTO';
-import User from './User';
+
+import User from '../../../../user/infra/typeorm/entities/User';
 
 @Entity('user_detail')
 export class UserDetail extends DefaultEntity implements IUserDetailDTO {
@@ -18,10 +19,10 @@ export class UserDetail extends DefaultEntity implements IUserDetailDTO {
   @Column()
   cpf: string;
 
-  @Column()
+  @Column({ name: 'first_name' })
   firstName: string;
 
-  @Column()
+  @Column({ name: 'last_name' })
   lastName: string;
 
   @Column()
@@ -30,7 +31,7 @@ export class UserDetail extends DefaultEntity implements IUserDetailDTO {
   @Column()
   number: number;
 
-  @Column()
+  @Column({ name: 'register_number' })
   registerNumber: string;
 
   @Column()
@@ -39,6 +40,6 @@ export class UserDetail extends DefaultEntity implements IUserDetailDTO {
   @Column()
   street: string;
 
-  @Column()
+  @Column({ name: 'zip_code' })
   zipCode: string;
 }

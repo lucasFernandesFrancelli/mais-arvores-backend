@@ -11,7 +11,7 @@ export default class CreateProductService {
   ) {}
 
   async execute(data: IProductDTO): Promise<IProductDTO> {
-    const product = await this.productRepository.findByName(data.name);
+    const product = await this.productRepository.findByName(data.description);
 
     if (product) {
       throw new AppError('Product already exists');

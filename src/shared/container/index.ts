@@ -9,6 +9,8 @@ import CategoryRepository from '../../modules/category/infra/typeorm/repositorie
 import { ICategoryRepository } from '../../modules/category/repositories/ICategoryRepository';
 import { IProductRepository } from '../../modules/product/repositories/IProductRepository';
 import { ProductRepository } from '../../modules/product/infra/typeorm/repositories/ProductRepository';
+import { IUserDetailRepository } from '../../modules/userDetail/repositories/IUserDetailRepository';
+import { UserDetailRepository } from '../../modules/userDetail/infra/typeorm/repositories/UserDetailRepository';
 
 container.registerSingleton<IUserRepository>('UserRepository', UserRepository);
 container.registerSingleton<ICategoryRepository>(
@@ -18,6 +20,11 @@ container.registerSingleton<ICategoryRepository>(
 container.registerSingleton<IProductRepository>(
   'ProductRepository',
   ProductRepository,
+);
+
+container.registerSingleton<IUserDetailRepository>(
+  'UserDetailRepository',
+  UserDetailRepository,
 );
 
 // Providers

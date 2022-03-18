@@ -16,8 +16,8 @@ export class ProductRepository implements IProductRepository {
     return this.repository.findOne(id);
   }
 
-  findByName(name: string): Promise<IProductDTO | undefined> {
-    return this.repository.findOne({ name });
+  findByName(description: string): Promise<IProductDTO | undefined> {
+    return this.repository.findOne({ description });
   }
 
   listProduct(): Promise<IProductDTO[]> {
