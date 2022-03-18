@@ -1,10 +1,10 @@
-import { container, inject, injectable } from 'tsyringe';
-import CreateUserService from '../../../services/CreateUserService';
+import { container } from 'tsyringe';
 import { Request, Response } from 'express';
 import { ListUserService } from 'modules/user/services/ListUserService';
 import FindUserService from 'modules/user/services/FindUserService';
 import UpdateUserService from 'modules/user/services/UpdateUserService';
 import AuthenticateUserService from 'modules/user/services/AuthenticateUserService';
+import CreateUserService from '../../../services/CreateUserService';
 
 export default class UserController {
   async create(request: Request, response: Response): Promise<void> {

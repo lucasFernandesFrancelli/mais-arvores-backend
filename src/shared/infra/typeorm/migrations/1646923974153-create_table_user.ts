@@ -12,12 +12,14 @@ export class createTableUser1646923974153 implements MigrationInterface {
             isPrimary: true,
           },
           {
-            name: 'name',
+            name: 'username',
             type: 'varchar(255)',
+            isUnique: true,
           },
           {
             name: 'email',
             type: 'varchar(255)',
+            isUnique: true,
           },
           {
             name: 'password',
@@ -29,7 +31,7 @@ export class createTableUser1646923974153 implements MigrationInterface {
             default: true,
           },
           {
-            name: 'admin',
+            name: 'is_admin',
             type: 'boolean',
             default: false,
           },

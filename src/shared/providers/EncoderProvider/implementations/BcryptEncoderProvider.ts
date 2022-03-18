@@ -1,6 +1,6 @@
-import { IEncoderProvider } from '../IEncoderProvider';
-import bcrypt, { hash } from 'bcryptjs';
+import bcrypt from 'bcryptjs';
 import { injectable } from 'tsyringe';
+import { IEncoderProvider } from '../IEncoderProvider';
 
 @injectable()
 export class BcryptEncoderProvider implements IEncoderProvider {

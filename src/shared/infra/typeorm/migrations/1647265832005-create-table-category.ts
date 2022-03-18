@@ -1,0 +1,56 @@
+import { MigrationInterface, QueryRunner, Table } from 'typeorm';
+
+export class createTableCategory1647265832005 implements MigrationInterface {
+  public async up(queryRunner: QueryRunner): Promise<void> {
+    await queryRunner.createTable(
+      new Table({
+        name: 'category',
+        columns: [
+          {
+            name: 'id',
+            type: 'varchar',
+            isPrimary: true,
+            length: '36',
+          },
+          {
+            name: 'description',
+            type: 'varchar',
+          },
+          {
+            name: 'user_id',
+            type: 'varchar',
+            length: '36',
+          },
+          {
+            name: 'created_at',
+            type: 'timestamp',
+            default: 'now()',
+          },
+          {
+            name: 'updated_at',
+            type: 'timestamp',
+            default: 'now()',
+          },
+          {
+            name: 'deleted_at',
+            type: 'timestamp',
+            isNullable: true,
+            default: null,
+          },
+        ],
+        foreignKeys: [
+          {
+            name: 'category_user_FK',
+            referencedTableName: 'user',
+            columnNames: ['user_id'],
+            referencedColumnNames: ['id'],
+          },
+        ],
+      }),
+    );
+  }
+
+  public async down(queryRunner: QueryRunner): Promise<void> {
+    await queryRunner.dropTable('category');
+  }
+}

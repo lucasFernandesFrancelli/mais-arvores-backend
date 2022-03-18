@@ -1,4 +1,4 @@
-import { Column, CreateDateColumn, Entity, PrimaryColumn } from 'typeorm';
+import { Column, Entity, PrimaryColumn } from 'typeorm';
 import { v4 as uuid } from 'uuid';
 
 import { DefaultEntity } from '../../../../../shared/infra/typeorm/entities/DefaultEntity';
@@ -9,19 +9,19 @@ export default class User extends DefaultEntity {
   readonly id: string;
 
   @Column()
-  name: string;
+  username: string;
 
   @Column()
   email: string;
 
-  @Column()
+  @Column({ name: 'password' })
   password: string;
 
   @Column({ name: 'is_active' })
   isActive: boolean;
 
-  @Column()
-  admin: boolean;
+  @Column({ name: 'is_admin' })
+  isAdmin: boolean;
 
   constructor() {
     super();

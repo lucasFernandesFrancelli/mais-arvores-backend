@@ -5,10 +5,29 @@ import { BcryptEncoderProvider } from 'shared/providers/EncoderProvider/implemen
 import { JwtTokenManagerProvider } from 'shared/providers/TokenManagerProvider/implementations/JwtTokenManagerProvider';
 import { ITokenManagerProvider } from 'shared/providers/TokenManagerProvider/ITokenManagerProvider';
 import { container } from 'tsyringe';
+import CategoryRepository from '../../modules/category/infra/typeorm/repositories/CategoryRepository';
+import { ICategoryRepository } from '../../modules/category/repositories/ICategoryRepository';
+import { IProductRepository } from '../../modules/product/repositories/IProductRepository';
+import { ProductRepository } from '../../modules/product/infra/typeorm/repositories/ProductRepository';
+import { IUserDetailRepository } from '../../modules/userDetail/repositories/IUserDetailRepository';
+import { UserDetailRepository } from '../../modules/userDetail/infra/typeorm/repositories/UserDetailRepository';
 
 container.registerSingleton<IUserRepository>('UserRepository', UserRepository);
+container.registerSingleton<ICategoryRepository>(
+  'CategoryRepository',
+  CategoryRepository,
+);
+container.registerSingleton<IProductRepository>(
+  'ProductRepository',
+  ProductRepository,
+);
 
-//Providers
+container.registerSingleton<IUserDetailRepository>(
+  'UserDetailRepository',
+  UserDetailRepository,
+);
+
+// Providers
 
 container.registerInstance<IEncoderProvider>(
   'EncoderProvider',

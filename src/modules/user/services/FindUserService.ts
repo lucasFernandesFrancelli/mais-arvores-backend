@@ -1,5 +1,5 @@
-import { AppError } from 'shared/errors/AppError';
 import { inject, injectable } from 'tsyringe';
+import { AppError } from '../../../shared/errors/AppError';
 import IUserDTO from '../dtos/IUserDTO';
 import { IUserRepository } from '../repositories/IUserRepository';
 
@@ -10,12 +10,15 @@ export default class FindUserService {
     private userRepository: IUserRepository,
   ) {}
 
-  async execute(id: string): Promise<IUserDTO> {
-    const user = await this.userRepository.findById(id);
+  async execute(id: string): Promise<Partial<IUserDTO>> {
+    const user: Partial<IUserDTO> | undefined =
+      await this.userRepository.findById(id);
 
     if (!user) {
       throw new AppError(`User not found`);
     }
+
+    delete user.password;
 
     return user;
   }

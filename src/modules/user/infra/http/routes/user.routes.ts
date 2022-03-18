@@ -9,17 +9,17 @@ const userRoutes = Router();
 const userController = new UserController();
 
 userRoutes.post(
-  '/user',
+  '',
   celebrate({ [Segments.BODY]: createUserSchema }),
   userController.create,
 );
 
-userRoutes.get('/user', userController.listUser);
+userRoutes.get('', userController.listUser);
 
-userRoutes.get('/user/:id', userController.findById);
+userRoutes.get('/:id', userController.findById);
 
 userRoutes.put(
-  '/user/:id',
+  '/:id',
   celebrate({ [Segments.BODY]: updateUserSchema }),
   userController.update,
 );

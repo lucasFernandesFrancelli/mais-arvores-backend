@@ -1,5 +1,5 @@
 import { injectable } from 'tsyringe';
-import { EntityRepository, getRepository, Repository } from 'typeorm';
+import { getRepository, Repository } from 'typeorm';
 import IUserDTO from '../../../dtos/IUserDTO';
 import { IUserRepository } from '../../../repositories/IUserRepository';
 import User from '../entities/User';
@@ -11,9 +11,8 @@ export default class UserRepository implements IUserRepository {
   constructor() {
     this.repository = getRepository(User);
   }
-  async update(id: string, user: IUserDTO): Promise<void> {
-    const updateUser = this.repository.findOne(id);
 
+  async update(id: string, user: IUserDTO): Promise<void> {
     await this.repository.update(id, user);
   }
 
@@ -24,6 +23,10 @@ export default class UserRepository implements IUserRepository {
 
   findByEmail(email: string): Promise<User | undefined> {
     return this.repository.findOne({ email });
+  }
+
+  findByUsername(username: string): Promise<User | undefined> {
+    return this.repository.findOne({ username });
   }
 
   listUser(): Promise<IUserDTO[]> {
