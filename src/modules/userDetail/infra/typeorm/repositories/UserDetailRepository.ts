@@ -12,6 +12,10 @@ export class UserDetailRepository implements IUserDetailRepository {
     this.repository = getRepository(UserDetail);
   }
 
+  findById(id: string): Promise<IUserDetailDTO | undefined> {
+    return this.repository.findOne(id);
+  }
+
   save(userDetail: IUserDetailDTO): Promise<IUserDetailDTO> {
     const createdUserDetail = this.repository.create(userDetail);
     return this.repository.save(createdUserDetail);
@@ -19,5 +23,9 @@ export class UserDetailRepository implements IUserDetailRepository {
 
   list(): Promise<IUserDetailDTO[]> {
     return this.repository.find();
+  }
+
+  async update(id: string, userDetail: IUserDetailDTO): Promise<void> {
+    await this.repository.update(id, userDetail);
   }
 }

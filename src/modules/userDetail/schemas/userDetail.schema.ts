@@ -1,6 +1,6 @@
 import Joi from 'joi';
 
-const createUserDetailSchema = Joi.object({
+const userDetailSchema = Joi.object({
   firstName: Joi.string().required(),
   lastName: Joi.string().required(),
   registerNumber: Joi.string().required(),
@@ -14,7 +14,7 @@ const createUserDetailSchema = Joi.object({
   number: Joi.number().required(),
 });
 
-export default createUserDetailSchema.options({
+export default userDetailSchema.options({
   abortEarly: false,
   allowUnknown: true,
   stripUnknown: true,
