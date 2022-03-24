@@ -19,10 +19,6 @@ export class createTablePaymentMethod1647441865787
             type: 'varchar',
           },
           {
-            name: 'description_name',
-            type: 'varchar',
-          },
-          {
             name: 'created_at',
             type: 'timestamp',
             default: 'now()',
