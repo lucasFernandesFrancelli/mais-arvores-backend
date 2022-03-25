@@ -1,7 +1,7 @@
 import { celebrate, Segments } from 'celebrate';
 import { Router } from 'express';
-import createUserSchema from 'modules/user/schemas/createUser.schema';
-import updateUserSchema from 'modules/user/schemas/updateUser.schema';
+import createUserSchema from '../../../schemas/createUser.schema';
+import updateUserSchema from '../../../schemas/updateUser.schema';
 import UserController from '../controller/UserController';
 
 const userRoutes = Router();

@@ -35,6 +35,7 @@
     "assets",
     "jest.",
     "prettier.",
-    "tsconfig.*"
+    "tsconfig.*",
+    "coverage"
   ]
 }
