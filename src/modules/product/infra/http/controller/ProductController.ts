@@ -9,7 +9,7 @@ import { DeleteProductService } from '../../../services/DeleteProductService';
 export default class ProductController {
   async create(request: Request, response: Response): Promise<void> {
     const data = request.body;
-    data.userId = request;
+    data.user = request.userId;
 
     const createProductService = container.resolve(CreateProductService);
 

@@ -3,7 +3,7 @@ import { Request, Response } from 'express';
 import { CreatePaymentMethodService } from '../../../services/CreatePaymentMethodService';
 import { ListPaymentMethodService } from '../../../services/ListPaymentMethodService';
 import { FindPaymentMethodService } from '../../../services/FindPaymentMethodService';
-import { UpdatePaymenteMethodService } from '../../../services/UpdatePaymenteMethodService';
+import { UpdatePaymentMethodService } from '../../../services/UpdatePaymentMethodService';
 import { DeletePaymentMethodService } from '../../../services/DeletePaymentMethodService';
 
 @injectable()
@@ -41,7 +41,7 @@ export class PaymentMethodController {
     const { body } = request;
 
     const updatePaymentMethodService = container.resolve(
-      UpdatePaymenteMethodService,
+      UpdatePaymentMethodService,
     );
 
     response.json(await updatePaymentMethodService.execute(id, body));

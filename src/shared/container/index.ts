@@ -13,6 +13,8 @@ import { IUserDetailRepository } from '../../modules/userDetail/repositories/IUs
 import { UserDetailRepository } from '../../modules/userDetail/infra/typeorm/repositories/UserDetailRepository';
 import { IPaymentMethodRepository } from '../../modules/paymentMethod/repositories/IPaymentMethodRepository';
 import { PaymentMethodRepository } from '../../modules/paymentMethod/infra/typeorm/repositories/PaymentMethodRepository';
+import { IRequestRepository } from '../../modules/request/repositories/IRequestRepository';
+import { RequestRepository } from '../../modules/request/infra/typeorm/repositories/RequestRepository';
 
 container.registerSingleton<IUserRepository>('UserRepository', UserRepository);
 container.registerSingleton<ICategoryRepository>(
@@ -32,6 +34,11 @@ container.registerSingleton<IUserDetailRepository>(
 container.registerSingleton<IPaymentMethodRepository>(
   'PaymentMethodRepository',
   PaymentMethodRepository,
+);
+
+container.registerSingleton<IRequestRepository>(
+  'RequestRepository',
+  RequestRepository,
 );
 
 // Providers

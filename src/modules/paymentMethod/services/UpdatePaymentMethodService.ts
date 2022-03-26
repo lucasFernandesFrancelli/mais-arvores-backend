@@ -4,7 +4,7 @@ import { IPaymentMethodDTO } from '../dtos/IPaymentMethodDTO';
 import { AppError } from '../../../shared/errors/AppError';
 
 @injectable()
-export class UpdatePaymenteMethodService {
+export class UpdatePaymentMethodService {
   constructor(
     @inject('PaymentMethodRepository')
     private paymentMethodRepository: IPaymentMethodRepository,
