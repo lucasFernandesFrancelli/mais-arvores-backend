@@ -21,7 +21,7 @@ export class ProductRepository implements IProductRepository {
   }
 
   listProduct(): Promise<IProductDTO[]> {
-    return this.repository.find();
+    return this.repository.find({ relations: ['category'] });
   }
 
   save(product: IProductDTO): Promise<IProductDTO> {

@@ -3,7 +3,7 @@ import { IRequestRepository } from '../repositories/IRequestRepository';
 import { IRequestDTO } from '../dtos/IRequestDTO';
 
 @injectable()
-export class ListRequestService {
+export class ListRequestByUserService {
   constructor(
     @inject('RequestRepository')
     private requestRepository: IRequestRepository,

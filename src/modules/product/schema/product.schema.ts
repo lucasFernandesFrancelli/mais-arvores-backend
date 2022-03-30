@@ -1,8 +1,8 @@
 import Joi from 'joi';
 
 const productSchema = Joi.object({
-  name: Joi.string().required(),
-  category: Joi.object({ id: String }).required(),
+  description: Joi.string().required(),
+  category: Joi.object({ id: Joi.string().required() }).required(),
   image: Joi.string().required(),
   price: Joi.number().required(),
 });

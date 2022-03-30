@@ -15,6 +15,8 @@ import { IPaymentMethodRepository } from '../../modules/paymentMethod/repositori
 import { PaymentMethodRepository } from '../../modules/paymentMethod/infra/typeorm/repositories/PaymentMethodRepository';
 import { IRequestRepository } from '../../modules/request/repositories/IRequestRepository';
 import { RequestRepository } from '../../modules/request/infra/typeorm/repositories/RequestRepository';
+import { IProductRequestRepository } from '../../modules/productRequest/repositories/IProductRequestRepository';
+import { ProductRequestRepository } from '../../modules/productRequest/infra/typeorm/repositories/ProductRequestRepository';
 
 container.registerSingleton<IUserRepository>('UserRepository', UserRepository);
 container.registerSingleton<ICategoryRepository>(
@@ -39,6 +41,11 @@ container.registerSingleton<IPaymentMethodRepository>(
 container.registerSingleton<IRequestRepository>(
   'RequestRepository',
   RequestRepository,
+);
+
+container.registerSingleton<IProductRequestRepository>(
+  'ProductRequestRepository',
+  ProductRequestRepository,
 );
 
 // Providers

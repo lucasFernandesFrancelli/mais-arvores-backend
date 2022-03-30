@@ -3,6 +3,7 @@ import { celebrate, Segments } from 'celebrate';
 import { RequestController } from '../controllers/RequestController';
 import { ensureAuthenticated } from '../../../../user/middlewares/ensureAuthenticated';
 import requestSchema from '../../../schemas/request.schema';
+import { ensureAdmin } from '../../../../user/middlewares/ensureAdmin';
 
 const requestRoutes = Router();
 
@@ -15,6 +16,12 @@ requestRoutes.post(
   requestController.create,
 );
 
-requestRoutes.get('', ensureAuthenticated, requestController.list);
+requestRoutes.get('/user', ensureAuthenticated, requestController.listByUser);
+requestRoutes.get(
+  '',
+  ensureAuthenticated,
+  ensureAdmin,
+  requestController.listAll,
+);
 
 export { requestRoutes };

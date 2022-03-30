@@ -1,9 +1,8 @@
 import { injectable } from 'tsyringe';
-import { createQueryBuilder, getRepository, Repository } from 'typeorm';
+import { getRepository, Repository } from 'typeorm';
 import { IRequestRepository } from '../../../repositories/IRequestRepository';
 import { Request } from '../entities/Request';
 import { IRequestDTO } from '../../../dtos/IRequestDTO';
-import IUserDTO from '../../../../user/dtos/IUserDTO';
 
 @injectable()
 export class RequestRepository implements IRequestRepository {
@@ -32,5 +31,9 @@ export class RequestRepository implements IRequestRepository {
 
   async update(id: string, request: IRequestDTO): Promise<void> {
     await this.repository.update(id, request);
+  }
+
+  listAllRequests(): Promise<IRequestDTO[]> {
+    return this.repository.find();
   }
 }

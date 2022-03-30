@@ -10,11 +10,11 @@ export default class Product extends DefaultEntity implements IProductDTO {
   @PrimaryColumn()
   id: string;
 
-  @ManyToOne(() => Category, { eager: true })
+  @ManyToOne(() => Category)
   @JoinColumn({ name: 'category_id', referencedColumnName: 'id' })
   category: Category;
 
-  @ManyToOne(() => User, { eager: true })
+  @ManyToOne(() => User)
   @JoinColumn({ name: 'user_id', referencedColumnName: 'id' })
   user: User;
 
