@@ -21,4 +21,10 @@ productRequestRoutes.get(
   productRequestController.listAll,
 );
 
+productRequestRoutes.get(
+  '/:requestId',
+  ensureAuthenticated,
+  productRequestController.listByRequest,
+);
+
 export { productRequestRoutes };

@@ -3,6 +3,8 @@ import { Router } from 'express';
 import createUserSchema from '../../../schemas/createUser.schema';
 import updateUserSchema from '../../../schemas/updateUser.schema';
 import UserController from '../controller/UserController';
+import { ensureAuthenticated } from '../../../middlewares/ensureAuthenticated';
+import { ensureAdmin } from '../../../middlewares/ensureAdmin';
 
 const userRoutes = Router();
 
@@ -14,7 +16,7 @@ userRoutes.post(
   userController.create,
 );
 
-userRoutes.get('', userController.listUser);
+userRoutes.get('', ensureAuthenticated, ensureAdmin, userController.listUser);
 
 userRoutes.get('/:id', userController.findById);
 

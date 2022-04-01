@@ -6,4 +6,5 @@ export interface IProductRequestRepository {
   update(id: string, data: IProductRequestDTO): Promise<void>;
   delete(id: string): Promise<void>;
   listAll(): Promise<IProductRequestDTO[]>;
+  listByRequestId(requestId: string): Promise<IProductRequestDTO[]>;
 }

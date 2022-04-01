@@ -32,4 +32,11 @@ export class ProductRequestRepository implements IProductRequestRepository {
   listAll(): Promise<IProductRequestDTO[]> {
     return this.repository.find({ relations: ['product', 'request'] });
   }
+
+  listByRequestId(requestId: string): Promise<IProductRequestDTO[]> {
+    return this.repository.find({
+      where: { request: { id: requestId } },
+      relations: ['product'],
+    });
+  }
 }
