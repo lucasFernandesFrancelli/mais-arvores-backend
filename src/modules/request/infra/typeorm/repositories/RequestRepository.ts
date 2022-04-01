@@ -34,6 +34,8 @@ export class RequestRepository implements IRequestRepository {
   }
 
   listAllRequests(): Promise<IRequestDTO[]> {
-    return this.repository.find();
+    return this.repository.find({
+      relations: ['products'],
+    });
   }
 }

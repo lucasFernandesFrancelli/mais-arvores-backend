@@ -1,9 +1,17 @@
-import { Column, Entity, JoinColumn, ManyToOne, PrimaryColumn } from 'typeorm';
+import {
+  Column,
+  Entity,
+  JoinColumn,
+  ManyToOne,
+  OneToMany,
+  PrimaryColumn,
+} from 'typeorm';
 import { v4 as uuid } from 'uuid';
 import { IRequestDTO } from '../../../dtos/IRequestDTO';
 import { DefaultEntity } from '../../../../../shared/infra/typeorm/entities/DefaultEntity';
 import User from '../../../../user/infra/typeorm/entities/User';
 import { PaymentMethod } from '../../../../paymentMethod/infra/typeorm/entities/PaymentMethod';
+import { RequestProduct } from './RequestProduct';
 
 @Entity('request')
 export class Request extends DefaultEntity implements IRequestDTO {
@@ -26,6 +34,9 @@ export class Request extends DefaultEntity implements IRequestDTO {
 
   @Column()
   total: number;
+
+  @OneToMany(() => RequestProduct, product => product.request)
+  products: RequestProduct[];
 
   constructor() {
     super();
