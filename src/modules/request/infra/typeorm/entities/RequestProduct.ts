@@ -1,4 +1,4 @@
-import { Column, Entity, JoinColumn, ManyToOne, PrimaryColumn } from 'typeorm';
+import { Column, Entity, JoinColumn, ManyToOne } from 'typeorm';
 
 import { DefaultEntity } from '../../../../../shared/infra/typeorm/entities/DefaultEntity';
 import { IRequestProductDTO } from '../../../dtos/IRequestProductDTO';
@@ -21,6 +21,6 @@ export class RequestProduct
   @Column({ name: 'product_quantity' })
   productQuantity: number;
 
-  @Column({ name: 'current_product_price' })
-  currentProductPrice: number;
+  @Column({ name: 'current_price' })
+  currentPrice: number;
 }

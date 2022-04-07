@@ -35,7 +35,9 @@ export class Request extends DefaultEntity implements IRequestDTO {
   @Column()
   total: number;
 
-  @OneToMany(() => RequestProduct, product => product.request)
+  @OneToMany(() => RequestProduct, product => product.request, {
+    cascade: true,
+  })
   products: RequestProduct[];
 
   constructor() {

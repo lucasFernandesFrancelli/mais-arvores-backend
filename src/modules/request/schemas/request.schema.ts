@@ -8,7 +8,7 @@ const requestSchema = Joi.object({
     Joi.object({
       product: Joi.object({ id: Joi.string() }),
       productQuantity: Joi.number().positive(),
-      currentProductPrice: Joi.number(),
+      currentPrice: Joi.number(),
     }),
   ),
 });
