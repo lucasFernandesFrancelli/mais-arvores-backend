@@ -1,9 +1,11 @@
 import { Router } from 'express';
 import { celebrate, Segments } from 'celebrate';
+import multer from 'multer';
 import ProductController from '../controller/ProductController';
 import { ensureAdmin } from '../../../../user/middlewares/ensureAdmin';
 import { ensureAuthenticated } from '../../../../user/middlewares/ensureAuthenticated';
-import productSchema from '../../../schema/product.schema';
+import { uploadImage } from '../../../../../shared/infra/http/middleware/upload/image';
+import productSchema from '../../../schema/createProduct.schema';
 
 const productRoutes = Router();
 
@@ -17,9 +19,14 @@ productRoutes.post(
   productController.create,
 );
 
+productRoutes.post(
+  '/:id/images/upload',
+  multer(uploadImage.getConfig).single('product'),
+  productController.uploadImage,
+);
+
 productRoutes.put(
   '/:id',
-  celebrate({ [Segments.BODY]: productSchema }),
   ensureAuthenticated,
   ensureAdmin,
   productController.update,

@@ -36,4 +36,8 @@ export class ProductRepository implements IProductRepository {
   async delete(id: string): Promise<void> {
     await this.repository.softDelete(id);
   }
+
+  async updateImageProduct(id: string, imageName: string): Promise<void> {
+    await this.repository.update(id, { image: imageName });
+  }
 }

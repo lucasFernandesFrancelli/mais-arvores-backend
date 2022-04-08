@@ -23,7 +23,10 @@ app.use(cors());
 
 app.use(express.json());
 
+console.log(`${process.cwd()}/upload`);
+
 app.use(routes);
+app.use('/products/download', express.static(`${process.cwd()}/uploads`));
 
 app.use(errorsHandler);
 

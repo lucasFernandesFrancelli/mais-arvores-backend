@@ -23,7 +23,7 @@ export class RequestRepository implements IRequestRepository {
   listRequestsByUser(userId: string): Promise<IRequestDTO[]> {
     return this.repository.find({
       where: { user: { id: userId } },
-      relations: ['products'],
+      relations: ['products', 'products.product'],
     });
   }
 

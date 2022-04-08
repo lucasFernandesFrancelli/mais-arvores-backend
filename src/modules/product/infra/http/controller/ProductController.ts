@@ -1,10 +1,11 @@
-import { Request, Response } from 'express';
+import { NextFunction, Request, Response } from 'express';
 import { container } from 'tsyringe';
 import CreateProductService from '../../../services/CreateProductService';
 import { ListProductService } from '../../../services/ListProductService';
 import { FindProductService } from '../../../services/FindProductService';
 import { UpdateProductService } from '../../../services/UpdateProductService';
 import { DeleteProductService } from '../../../services/DeleteProductService';
+import UpdateProductImageService from '../../../services/UpdateProductImageService';
 
 export default class ProductController {
   async create(request: Request, response: Response): Promise<void> {
@@ -14,6 +15,26 @@ export default class ProductController {
     const createProductService = container.resolve(CreateProductService);
 
     response.status(201).json(await createProductService.execute(data));
+  }
+
+  async uploadImage(request: Request, response: Response, next: NextFunction) {
+    try {
+      if (!request.file || !request.file.filename) {
+        response.status(401).json({ response: `Not a valid file` });
+        return;
+      }
+
+      const { id } = request.params;
+      const updateProductImageService = container.resolve(
+        UpdateProductImageService,
+      );
+
+      response.json(
+        await updateProductImageService.execute(id, request.file.filename),
+      );
+    } catch (e) {
+      next(e);
+    }
   }
 
   async listProduct(request: Request, response: Response): Promise<void> {

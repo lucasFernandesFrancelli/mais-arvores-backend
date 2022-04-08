@@ -7,4 +7,5 @@ export interface IProductRepository {
   findById(id: string): Promise<IProductDTO | undefined>;
   update(id: string, product: IProductDTO): Promise<void>;
   delete(id: string): Promise<void>;
+  updateImageProduct(id: string, imageName: string): Promise<void>;
 }
