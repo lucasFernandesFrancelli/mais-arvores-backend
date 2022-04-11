@@ -21,6 +21,8 @@ productRoutes.post(
 
 productRoutes.post(
   '/:id/images/upload',
+  ensureAuthenticated,
+  ensureAdmin,
   multer(uploadImage.getConfig).single('product'),
   productController.uploadImage,
 );

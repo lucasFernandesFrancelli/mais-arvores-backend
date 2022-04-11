@@ -1,6 +1,5 @@
 import { Request } from 'express';
-// eslint-disable-next-line import/no-extraneous-dependencies
-import mime from 'mime';
+import mime from 'mime-types';
 import multer from 'multer';
 import path from 'node:path';
 import fs from 'node:fs';
