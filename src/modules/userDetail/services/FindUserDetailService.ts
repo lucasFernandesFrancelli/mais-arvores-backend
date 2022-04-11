@@ -10,7 +10,7 @@ export class FindUserDetailService {
     private userDetailRepository: IUserDetailRepository,
   ) {}
 
-  async execute(id: string): Promise<IUserDetailDTO | undefined> {
+  async execute(id: string): Promise<IUserDetailDTO> {
     const userDetail = await this.userDetailRepository.findById(id);
 
     if (!userDetail) {

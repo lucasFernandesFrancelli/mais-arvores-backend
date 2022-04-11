@@ -26,7 +26,9 @@ export default class AuthenticateUserService {
     if (!user) {
       throw new AppError('Email or password incorrect');
     }
-
+    if (user.isActive === false) {
+      throw new AppError('User inactive. Please, contact the support');
+    }
     const passwordMatch = await this.encoderProvider.compare(
       data.password,
       user.password,

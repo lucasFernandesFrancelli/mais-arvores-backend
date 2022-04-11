@@ -1,6 +1,8 @@
 import { IDefaultDTO } from '../../../shared/dtos/IDefaultDTO';
+import IUserDTO from '../../user/dtos/IUserDTO';
 
 export interface IUserDetailDTO extends IDefaultDTO {
+  user: IUserDTO;
   firstName: string;
   lastName: string;
   registerNumber: string;

@@ -1,6 +1,6 @@
 import { inject, injectable } from 'tsyringe';
 
-import { IEncoderProvider } from 'shared/providers/EncoderProvider/IEncoderProvider';
+import { IEncoderProvider } from '../../../shared/providers/EncoderProvider/IEncoderProvider';
 import IUserDTO from '../dtos/IUserDTO';
 import { IUserRepository } from '../repositories/IUserRepository';
 import { AppError } from '../../../shared/errors/AppError';
