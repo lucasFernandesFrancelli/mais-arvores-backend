@@ -9,11 +9,11 @@ export default (): {
 } => {
   return {
     DIALECT: process.env.DB_DIALECT ?? 'mysql',
-    HOST: process.env.DB_HOST ?? 'localhost',
+    HOST: process.env.DB_HOST ?? 'us-cdbr-east-05.cleardb.net',
     PORT: Number(process.env.DB_PORT) ?? 3306,
-    NAME: process.env.DB_NAME ?? '',
+    NAME: process.env.DB_NAME ?? 'heroku_ca4507189fd2c81',
     TEST_NAME: process.env.DB_TEST_NAME ?? '',
-    USER: process.env.DB_USER ?? '',
-    PASSWORD: process.env.DB_PASSWORD ?? '',
+    USER: process.env.DB_USER ?? 'bf346aba9bb7c4',
+    PASSWORD: process.env.DB_PASSWORD ?? '51fc4007',
   };
 };
