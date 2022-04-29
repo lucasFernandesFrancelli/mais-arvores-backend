@@ -83,6 +83,8 @@ export class createTableUserDetail1647434575034 implements MigrationInterface {
             referencedTableName: 'user',
             columnNames: ['user_id'],
             referencedColumnNames: ['id'],
+            onDelete: 'CASCADE',
+            onUpdate: 'CASACDE',
           },
         ],
       }),

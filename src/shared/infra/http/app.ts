@@ -6,7 +6,7 @@ import { config } from 'dotenv-flow';
 
 import '../../container';
 
-import createConnection from '../typeorm';
+import { createConnection } from '../typeorm';
 import { errorsHandler } from '../../handlers/ErrorsHandler';
 
 import { routes } from './routes';
@@ -17,7 +17,7 @@ const app = express();
 
 createConnection()
   .then(() => console.log('Connected to database'))
-  .catch(() => console.log('Cannot connect to database'));
+  .catch(err => console.log(`Cannot connect to database: ${err}`));
 
 app.use(cors());
 

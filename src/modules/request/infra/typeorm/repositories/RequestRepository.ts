@@ -1,23 +1,24 @@
 import { injectable } from 'tsyringe';
-import { getRepository, Repository } from 'typeorm';
+import { Repository } from 'typeorm';
 import { IRequestRepository } from '../../../repositories/IRequestRepository';
 import { Request } from '../entities/Request';
 import { IRequestDTO } from '../../../dtos/IRequestDTO';
+import dataSource from '../../../../../shared/infra/typeorm';
 
 @injectable()
 export class RequestRepository implements IRequestRepository {
   private repository: Repository<Request>;
 
   constructor() {
-    this.repository = getRepository(Request);
+    this.repository = dataSource.getRepository(Request);
   }
 
   async delete(id: string): Promise<void> {
     await this.repository.softDelete({ id });
   }
 
-  findById(id: string): Promise<IRequestDTO | undefined> {
-    return this.repository.findOne(id);
+  findById(id: string): Promise<IRequestDTO | null> {
+    return this.repository.findOneBy({ id });
   }
 
   listRequestsByUser(userId: string): Promise<IRequestDTO[]> {

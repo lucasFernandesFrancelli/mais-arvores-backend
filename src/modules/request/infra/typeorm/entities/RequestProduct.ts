@@ -1,4 +1,4 @@
-import { Column, Entity, JoinColumn, ManyToOne } from 'typeorm';
+import { Column, Entity, JoinColumn, ManyToOne, PrimaryColumn } from 'typeorm';
 
 import { DefaultEntity } from '../../../../../shared/infra/typeorm/entities/DefaultEntity';
 import { IRequestProductDTO } from '../../../dtos/IRequestProductDTO';
@@ -10,11 +10,13 @@ export class RequestProduct
   extends DefaultEntity
   implements IRequestProductDTO
 {
-  @ManyToOne(() => Product, { primary: true })
+  @PrimaryColumn({ name: 'product_id' })
+  @ManyToOne(() => Product)
   @JoinColumn({ name: 'product_id', referencedColumnName: 'id' })
   product: Product;
 
-  @ManyToOne(() => Request, { primary: true })
+  @PrimaryColumn({ name: 'request_id' })
+  @ManyToOne(() => Request)
   @JoinColumn({ name: 'request_id', referencedColumnName: 'id' })
   request: Request;
 

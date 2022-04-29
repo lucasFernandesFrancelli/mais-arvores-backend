@@ -1,13 +1,14 @@
-import { getRepository, Repository } from 'typeorm';
+import { Repository } from 'typeorm';
 import { IPaymentMethodRepository } from '../../../repositories/IPaymentMethodRepository';
 import { IPaymentMethodDTO } from '../../../dtos/IPaymentMethodDTO';
 import { PaymentMethod } from '../entities/PaymentMethod';
+import dataSource from '../../../../../shared/infra/typeorm';
 
 export class PaymentMethodRepository implements IPaymentMethodRepository {
   private repository: Repository<PaymentMethod>;
 
   constructor() {
-    this.repository = getRepository(PaymentMethod);
+    this.repository = dataSource.getRepository(PaymentMethod);
   }
 
   save(paymentMethod: IPaymentMethodDTO): Promise<IPaymentMethodDTO> {
@@ -17,16 +18,16 @@ export class PaymentMethodRepository implements IPaymentMethodRepository {
 
   findByDescription(
     description: string,
-  ): Promise<IPaymentMethodDTO | undefined> {
-    return this.repository.findOne({ description });
+  ): Promise<IPaymentMethodDTO | undefined | null> {
+    return this.repository.findOneBy({ description });
   }
 
   list(): Promise<IPaymentMethodDTO[]> {
     return this.repository.find();
   }
 
-  findById(id: string): Promise<IPaymentMethodDTO | undefined> {
-    return this.repository.findOne(id);
+  findById(id: string): Promise<IPaymentMethodDTO | undefined | null> {
+    return this.repository.findOneBy({ id });
   }
 
   async update(id: string, paymentMethod: IPaymentMethodDTO): Promise<void> {

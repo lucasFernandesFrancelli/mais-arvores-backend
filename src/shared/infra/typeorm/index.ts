@@ -1,18 +1,35 @@
-import { createConnection, getConnectionOptions, Connection } from 'typeorm';
+import { DataSource } from 'typeorm';
+import { resolve } from 'node:path';
+import { config } from 'dotenv-flow';
 import database from '../../../config/database';
 
-export default async (name = 'default'): Promise<Connection> => {
-  const defaultOptions = await getConnectionOptions();
-  const databaseConfig = database();
+config({ silent: true });
 
-  console.log(databaseConfig);
-  return createConnection(
-    Object.assign(defaultOptions, {
-      name,
-      database:
-        process.env.NODE_ENV === 'test'
-          ? databaseConfig.TEST_NAME
-          : defaultOptions.database,
-    }),
-  );
-};
+const databaseConfig = database();
+
+const dataSource = new DataSource({
+  type: 'mysql',
+  host: databaseConfig.HOST,
+  port: databaseConfig.PORT,
+  username: databaseConfig.USER,
+  password: databaseConfig.PASSWORD,
+  database: databaseConfig.NAME,
+  synchronize: false,
+  entities: [
+    resolve(__dirname, 'entities/*.{ts,js}'),
+    resolve(
+      __dirname,
+      '..',
+      '..',
+      '..',
+      'modules/**/infra/typeorm/entities/*.{ts,js}',
+    ),
+  ],
+  migrations: [resolve(__dirname, 'migrations/*.{ts,js}')],
+});
+
+export function createConnection(host = 'database'): Promise<DataSource> {
+  return dataSource.setOptions({ host }).initialize();
+}
+
+export default dataSource;

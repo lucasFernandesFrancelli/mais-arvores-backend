@@ -1,4 +1,3 @@
-import * as Console from 'console';
 import { IUserRepository } from '../IUserRepository';
 import IUserDTO from '../../dtos/IUserDTO';
 import User from '../../infra/typeorm/entities/User';

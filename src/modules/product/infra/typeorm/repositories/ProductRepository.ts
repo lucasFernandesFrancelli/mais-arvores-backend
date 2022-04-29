@@ -1,23 +1,24 @@
 import { injectable } from 'tsyringe';
-import { getRepository, Repository } from 'typeorm';
+import { Repository } from 'typeorm';
 import { IProductRepository } from '../../../repositories/IProductRepository';
 import IProductDTO from '../../../dtos/IProductDTO';
 import Product from '../entities/Product';
+import dataSource from '../../../../../shared/infra/typeorm';
 
 @injectable()
 export class ProductRepository implements IProductRepository {
   private repository: Repository<Product>;
 
   constructor() {
-    this.repository = getRepository(Product);
+    this.repository = dataSource.getRepository(Product);
   }
 
-  findById(id: string): Promise<IProductDTO | undefined> {
-    return this.repository.findOne(id);
+  findById(id: string): Promise<IProductDTO | undefined | null> {
+    return this.repository.findOneBy({ id });
   }
 
-  findByName(description: string): Promise<IProductDTO | undefined> {
-    return this.repository.findOne({ description });
+  findByName(description: string): Promise<IProductDTO | undefined | null> {
+    return this.repository.findOneBy({ description });
   }
 
   listProduct(): Promise<IProductDTO[]> {
