@@ -12,6 +12,9 @@ export class UserDetailRepository implements IUserDetailRepository {
   constructor() {
     this.repository = dataSource.getRepository(UserDetail);
   }
+  findByCPF(cpf: string): Promise<IUserDetailDTO | null> {
+    return this.repository.findOneBy({ cpf });
+  }
 
   save(userDetail: IUserDetailDTO): Promise<IUserDetailDTO> {
     const createdUserDetail = this.repository.create(userDetail);

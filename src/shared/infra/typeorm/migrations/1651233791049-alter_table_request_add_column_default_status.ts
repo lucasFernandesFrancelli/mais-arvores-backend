@@ -14,6 +14,7 @@ export class alterTableRequestAddColumnDefaultStatus1651233791049
       new TableColumn({
         name: 'id_default_request_status',
         type: 'varchar',
+        isNullable: true,
       }),
     );
     await queryRunner.createForeignKey(

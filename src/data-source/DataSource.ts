@@ -2,7 +2,7 @@ import 'reflect-metadata';
 import { DataSource } from 'typeorm';
 import { resolve } from 'node:path';
 import { config } from 'dotenv-flow';
-import database from '../../../config/database';
+import database from '../config/database';
 
 config({ silent: true });
 

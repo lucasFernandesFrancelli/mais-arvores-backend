@@ -1,0 +1,222 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Mais Árvores Documentação",
+    "description": "Api de gerenciamento de produtos voltados à natureza",
+    "version": "1.0.0",
+    "contact": {
+      "name": "Lucas Fernandes",
+      "url": "https://github.com/lucasFernandesFrancelli",
+      "email": "luffbsilva2002@gmail.com"
+    }
+  },
+  "servers": [
+    {
+      "url": "http://localhost:4000",
+      "description": "Ambiente Local"
+    },
+    {
+      "url": "https://mais-arvores-api.herokuapp.com",
+      "description": "Ambiente de produção"
+    }
+  ],
+  "paths": {
+    "/users/login": {
+      "post": {
+        "tags": ["Login"],
+        "summary": "Logar usuário",
+        "description": "Logar usuário no sistema com email e senha",
+        "security": [{ "bearerAuth": [] }],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "email": { "type": "string" },
+                  "password": { "type": "string" }
+                },
+                "example": {
+                  "email": "usuario@email.com",
+                  "password": "12345678"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": { "description": "Logado com sucesso" },
+          "401": { "description": "Email ou senha incorretos" },
+          "500": { "description": "Erro interno do servidor" }
+        }
+      }
+    },
+    "/users": {
+      "post": {
+        "tags": ["Usuário"],
+        "summary": "Criar usuário",
+        "description": "Criar um novo usuário",
+        "security": [{ "bearerAuth": [] }],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "username": { "type": "string" },
+                  "email": { "type": "string" },
+                  "password": { "type": "string", "minimum": 8 }
+                },
+                "example": {
+                  "username": "Nome_de_usuario",
+                  "email": "usuario@email.com",
+                  "password": "12345678"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": { "description": "Criado com sucesso" },
+          "422": { "description": "Nome de usuário ou email já existem" },
+          "500": { "description": "Erro interno do servidor" }
+        }
+      },
+      "get": {
+        "tags": ["Usuário"],
+        "summary": "Listar usuários",
+        "description": "Listar todos os usuários - Apenas usuário administrador pode listar",
+        "security": [{ "bearerAuth": [] }],
+        "responses": {
+          "200": {
+            "description": "Listado com sucesso",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "id": { "type": "string", "example": "095c8083-862a-4d3c-9122-87e82f23837c" },
+                      "username": { "type": "string", "example": "Nome do usuário" },
+                      "email": { "type": "string", "example": "usuario@email.com" },
+                      "isActive": { "type": "boolean", "example": true },
+                      "isAdmin": { "type": "boolean", "example": false }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": { "description": "Não autorizado!" },
+          "500": { "description": "Erro interno do servidor" }
+        }
+      }
+    },
+    "/users/{id}": {
+      "put": {
+        "tags": ["Usuário"],
+        "summary": "Atualizar usuário",
+        "description": "Atualizar um usuário pelo ID",
+        "security": [{ "bearerAuth": [] }],
+        "parameters": [
+          {
+            "required": true,
+            "in": "path",
+            "name": "id",
+            "description": "Atualiza o usuário pelo ID especificado"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "username": { "type": "string", "required": false },
+                  "email": { "type": "string", "required": false },
+                  "password": { "type": "string", "minimum": 8, "required": false }
+                },
+                "example": {
+                  "username": "Nome_de_usuario",
+                  "email": "usuario@email.com",
+                  "password": "12345678"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": { "description": "Atualizado com sucesso" },
+          "422": { "description": "Usuário não encontrado ou email ou nome de usuário já existem no banco" },
+          "500": { "description": "Erro interno do servidor" }
+        }
+      },
+      "get": {
+        "tags": ["Usuário"],
+        "summary": "Mostrar usuário",
+        "description": "Mostra um usuário pelo ID",
+        "security": [{ "bearerAuth": [] }],
+        "parameters": [
+          {
+            "required": true,
+            "in": "path",
+            "name": "id",
+            "description": "Encontra o usuário pelo ID especificado"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Encontrado com sucesso",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "id": { "type": "string", "example": "095c8083-862a-4d3c-9122-87e82f23837c" },
+                    "username": { "type": "string", "example": "Nome do usuário" },
+                    "email": { "type": "string", "example": "usuario@email.com" },
+                    "isActive": { "type": "boolean", "example": true },
+                    "isAdmin": { "type": "boolean", "example": false }
+                  }
+                }
+              }
+            }
+          },
+          "401": { "description": "Não autorizado!" },
+          "422": { "description": "Usuário não encontrado" },
+          "500": { "description": "Erro interno do servidor" }
+        }
+      },
+      "delete": {
+        "tags": ["Usuário"],
+        "summary": "Deletar usuário",
+        "description": "Deleta um usuário pelo ID",
+        "security": [{ "bearerAuth": [] }],
+        "parameters": [
+          {
+            "required": true,
+            "in": "path",
+            "name": "id",
+            "description": "Deleta o usuário pelo ID especificado"
+          }
+        ],
+        "responses": {
+          "200": { "description": "Deletado com sucesso" },
+          "401": { "description": "Não autorizado!" },
+          "422": { "description": "Usuário não encontrado" },
+          "500": { "description": "Erro interno do servidor" }
+        }
+      }
+    }
+  },
+  "components": {
+    "securitySchemes": {
+      "bearerAuth": {
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "JWT"
+      }
+    }
+  }
+}
