@@ -1,5 +1,5 @@
 import { injectable } from 'tsyringe';
-import { Repository } from 'typeorm';
+import { Repository, getRepository } from 'typeorm';
 import { ICategoryRepository } from '../../../repositories/ICategoryRepository';
 import Category from '../entities/Category';
 import ICategoryDTO from '../../../dtos/ICategoryDTO';
@@ -10,7 +10,7 @@ export default class CategoryRepository implements ICategoryRepository {
   private repository: Repository<Category>;
 
   constructor() {
-    this.repository = dataSource.getRepository(Category);
+    this.repository = getRepository(Category);
   }
 
   save(category: ICategoryDTO): Promise<ICategoryDTO> {
@@ -19,13 +19,13 @@ export default class CategoryRepository implements ICategoryRepository {
   }
 
   findById(id: string): Promise<ICategoryDTO | undefined | null> {
-    return this.repository.findOneBy({ id });
+    return this.repository.findOne(id);
   }
 
   findByDescription(
     description: string,
   ): Promise<ICategoryDTO | undefined | null> {
-    return this.repository.findOneBy({ description });
+    return this.repository.findOne({ description });
   }
 
   list(): Promise<ICategoryDTO[]> {

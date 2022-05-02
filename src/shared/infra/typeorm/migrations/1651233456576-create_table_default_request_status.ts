@@ -18,6 +18,22 @@ export class createTableDefaultRequestStatus1651233456576
             name: 'description',
             type: 'varchar',
           },
+          {
+            name: 'created_at',
+            type: 'timestamp',
+            default: 'now()',
+          },
+          {
+            name: 'updated_at',
+            type: 'timestamp',
+            default: 'now()',
+          },
+          {
+            name: 'deleted_at',
+            type: 'timestamp',
+            isNullable: true,
+            default: null,
+          },
         ],
       }),
     );

@@ -7,7 +7,7 @@ import swaggerUi from 'swagger-ui-express';
 
 import '../../container';
 
-import { createConnection } from '../typeorm';
+import createConnection from '../typeorm';
 import { errorsHandler } from '../../handlers/ErrorsHandler';
 import swaggerFile from './swagger/openapi.json';
 
@@ -19,8 +19,7 @@ const app = express();
 
 createConnection()
   .then(() => console.log('Connected to database'))
-  .catch(err => console.log(`Cannot connect to database: ${err}`));
-
+  .catch(() => console.log('Cannot connect to database'));
 app.use(cors());
 
 app.use(express.json());

@@ -8,7 +8,7 @@
     "build": "rimraf dist/* && tsc -p tsconfig.json && tscpaths -p tsconfig.json -s . -o ./dist",
     "postbuild": "copyfiles .env.example dist/",
     "start": "node dist/src/shared/infra/http/server.js",
-    "typeorm": "typeorm-ts-node-commonjs",
+    "typeorm": "ts-node-dev -r tsconfig-paths/register ./node_modules/typeorm/cli.js",
     "test": "NODE_ENV=test jest --runInBand"
   },
   "keywords": [],
@@ -61,7 +61,7 @@
     "reflect-metadata": "^0.1.13",
     "swagger-ui-express": "^4.3.0",
     "tsyringe": "^4.6.0",
-    "typeorm": "^0.3.6",
+    "typeorm": "^0.2.45",
     "uuid": "^8.3.2",
     "yup": "^0.32.11"
   }
