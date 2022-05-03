@@ -1,5 +1,5 @@
 import { injectable } from 'tsyringe';
-import { Repository } from 'typeorm';
+import { Repository, getRepository } from 'typeorm';
 import { IRequestStatusRepository } from '../../../repositories/IRequestStatusRepository';
 import RequestStatus from '../entities/RequestStatus';
 import IRequestStatusDTO from '../../../dtos/IRequestStatusDTO';
@@ -12,33 +12,14 @@ export default class RequestStatusRepository
   private repository: Repository<RequestStatus>;
 
   constructor() {
-    this.repository = dataSource.getRepository(RequestStatus);
+    this.repository = getRepository(RequestStatus);
   }
 
-  save(requestStatus: IRequestStatusDTO): Promise<IRequestStatusDTO> {
-    const createdCategory = this.repository.create(requestStatus);
-    return this.repository.save(createdCategory);
-  }
-
-  findById(id: string): Promise<IRequestStatusDTO | undefined | null> {
-    return this.repository.findOneBy({ id });
-  }
-
-  findByDescription(
-    description: string,
-  ): Promise<IRequestStatusDTO | undefined | null> {
-    return this.repository.findOneBy({ description });
+  findById(id: number): Promise<IRequestStatusDTO | undefined | null> {
+    return this.repository.findOne(id);
   }
 
   list(): Promise<IRequestStatusDTO[]> {
     return this.repository.find();
-  }
-
-  async update(id: string, requestStatus: IRequestStatusDTO): Promise<void> {
-    await this.repository.update(id, requestStatus);
-  }
-
-  async delete(id: string): Promise<void> {
-    await this.repository.softDelete(id);
   }
 }

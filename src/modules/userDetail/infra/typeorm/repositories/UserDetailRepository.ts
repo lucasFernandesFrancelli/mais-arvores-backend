@@ -12,7 +12,7 @@ export class UserDetailRepository implements IUserDetailRepository {
     this.repository = getRepository(UserDetail);
   }
 
-  findByCPF(cpf: string): Promise<IUserDetailDTO | undefined> {
+  findByRG(cpf: string): Promise<IUserDetailDTO | undefined> {
     return this.repository.findOne({ cpf });
   }
 
@@ -30,6 +30,6 @@ export class UserDetailRepository implements IUserDetailRepository {
   }
 
   findById(id: string): Promise<IUserDetailDTO | undefined> {
-    return this.repository.findOne({ user: { id } });
+    return this.repository.findOne(id);
   }
 }

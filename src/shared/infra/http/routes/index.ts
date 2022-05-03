@@ -15,6 +15,6 @@ routes.use('/categories', categoryRoutes);
 routes.use('/products', productRoutes);
 routes.use('/payment-method', paymentMethodRoutes);
 routes.use('/request', requestRoutes);
-routes.use('/requestStatus', requestStatusRoutes);
+routes.use('/request-status', requestStatusRoutes);
 
 export { routes };

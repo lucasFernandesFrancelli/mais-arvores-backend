@@ -10,33 +10,21 @@ export class createTableDefaultRequestStatus1651233456576
         columns: [
           {
             name: 'id_default_request_status',
-            type: 'varchar',
+            type: 'integer',
             isPrimary: true,
-            length: '36',
+            isGenerated: true,
+            generationStrategy: 'increment',
           },
           {
             name: 'description',
             type: 'varchar',
           },
-          {
-            name: 'created_at',
-            type: 'timestamp',
-            default: 'now()',
-          },
-          {
-            name: 'updated_at',
-            type: 'timestamp',
-            default: 'now()',
-          },
-          {
-            name: 'deleted_at',
-            type: 'timestamp',
-            isNullable: true,
-            default: null,
-          },
         ],
       }),
-    );
+    ),
+      await queryRunner.query(
+        `INSERT INTO default_request_status (description) VALUES ("Pedido recebido"), ("Pedido em preparação"), ("Pedido em rota de entrega"), ("Pedido finalizado")`,
+      );
   }
 
   public async down(queryRunner: QueryRunner): Promise<void> {

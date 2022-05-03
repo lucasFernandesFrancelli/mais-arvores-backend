@@ -10,7 +10,7 @@ export class FindRequestStatusService {
     private requestStatusRepository: IRequestStatusRepository,
   ) {}
 
-  async execute(id: string): Promise<IRequestStatusDTO> {
+  async execute(id: number): Promise<IRequestStatusDTO> {
     const requestStatus = await this.requestStatusRepository.findById(id);
 
     if (!requestStatus) {

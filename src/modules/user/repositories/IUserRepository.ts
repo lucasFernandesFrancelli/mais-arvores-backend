@@ -7,4 +7,5 @@ export interface IUserRepository {
   listUser(): Promise<IUserDTO[]>;
   findById(id: string): Promise<IUserDTO | null | undefined>;
   update(id: string, user: IUserDTO): Promise<void>;
+  delete(id: string): Promise<void>;
 }

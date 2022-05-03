@@ -31,9 +31,6 @@ export class UserDetail extends DefaultEntity implements IUserDetailDTO {
   @Column()
   number: number;
 
-  @Column({ name: 'register_number' })
-  registerNumber: string;
-
   @Column()
   state: string;
 

@@ -12,6 +12,10 @@ export default class UserRepository implements IUserRepository {
     this.repository = getRepository(User);
   }
 
+  async delete(id: string): Promise<void> {
+    await this.repository.softDelete(id);
+  }
+
   async update(id: string, user: IUserDTO): Promise<void> {
     await this.repository.update(id, user);
   }
