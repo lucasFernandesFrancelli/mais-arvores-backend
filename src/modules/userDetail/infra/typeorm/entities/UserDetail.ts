@@ -1,4 +1,4 @@
-import { Column, Entity, JoinColumn, OneToOne, PrimaryColumn } from 'typeorm';
+import { Column, Entity, JoinColumn, OneToOne } from 'typeorm';
 import { DefaultEntity } from '../../../../../shared/infra/typeorm/entities/DefaultEntity';
 import { IUserDetailDTO } from '../../../dtos/IUserDetailDTO';
 
@@ -6,8 +6,7 @@ import User from '../../../../user/infra/typeorm/entities/User';
 
 @Entity('user_detail')
 export class UserDetail extends DefaultEntity implements IUserDetailDTO {
-  @PrimaryColumn({ name: 'user_id' })
-  @OneToOne(() => User, { eager: true, onDelete: 'CASCADE' })
+  @OneToOne(() => User, { primary: true, eager: true, onDelete: 'CASCADE' })
   @JoinColumn({ name: 'user_id', referencedColumnName: 'id' })
   user: User;
 
@@ -31,9 +30,6 @@ export class UserDetail extends DefaultEntity implements IUserDetailDTO {
 
   @Column()
   number: number;
-
-  @Column({ name: 'register_number' })
-  registerNumber: string;
 
   @Column()
   state: string;

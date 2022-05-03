@@ -1,30 +1,36 @@
 import { injectable } from 'tsyringe';
-import { Repository } from 'typeorm';
+import { getRepository, Repository } from 'typeorm';
 import { IRequestRepository } from '../../../repositories/IRequestRepository';
 import { Request } from '../entities/Request';
 import { IRequestDTO } from '../../../dtos/IRequestDTO';
-import dataSource from '../../../../../shared/infra/typeorm';
 
 @injectable()
 export class RequestRepository implements IRequestRepository {
   private repository: Repository<Request>;
 
   constructor() {
-    this.repository = dataSource.getRepository(Request);
+    this.repository = getRepository(Request);
   }
 
   async delete(id: string): Promise<void> {
     await this.repository.softDelete({ id });
   }
 
-  findById(id: string): Promise<IRequestDTO | null> {
-    return this.repository.findOneBy({ id });
+  findById(id: string): Promise<IRequestDTO | undefined> {
+    return this.repository.findOne(id, {
+      relations: ['requestStatus', 'products'],
+    });
   }
 
   listRequestsByUser(userId: string): Promise<IRequestDTO[]> {
     return this.repository.find({
       where: { user: { id: userId } },
-      relations: ['products', 'products.product'],
+      relations: [
+        'paymentMethod',
+        'products',
+        'products.product',
+        'requestStatus',
+      ],
     });
   }
 
@@ -38,6 +44,8 @@ export class RequestRepository implements IRequestRepository {
   }
 
   listAllRequests(): Promise<IRequestDTO[]> {
-    return this.repository.find();
+    return this.repository.find({
+      relations: ['products', 'products.product'],
+    });
   }
 }

@@ -13,7 +13,8 @@ export class alterTableRequestAddColumnDefaultStatus1651233791049
       'request',
       new TableColumn({
         name: 'id_default_request_status',
-        type: 'varchar',
+        type: 'integer',
+        isNullable: true,
       }),
     );
     await queryRunner.createForeignKey(

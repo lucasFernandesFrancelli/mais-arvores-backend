@@ -1,16 +1,19 @@
 import { injectable } from 'tsyringe';
-import { Repository } from 'typeorm';
+import { getRepository, Repository } from 'typeorm';
 import { IUserDetailDTO } from '../../../dtos/IUserDetailDTO';
 import { IUserDetailRepository } from '../../../repositories/IUserDetailRepository';
 import { UserDetail } from '../entities/UserDetail';
-import dataSource from '../../../../../shared/infra/typeorm';
 
 @injectable()
 export class UserDetailRepository implements IUserDetailRepository {
   private repository: Repository<UserDetail>;
 
   constructor() {
-    this.repository = dataSource.getRepository(UserDetail);
+    this.repository = getRepository(UserDetail);
+  }
+
+  findByRG(cpf: string): Promise<IUserDetailDTO | undefined> {
+    return this.repository.findOne({ cpf });
   }
 
   save(userDetail: IUserDetailDTO): Promise<IUserDetailDTO> {
@@ -26,7 +29,7 @@ export class UserDetailRepository implements IUserDetailRepository {
     await this.repository.update(id, userDetail);
   }
 
-  findById(id: string): Promise<IUserDetailDTO | null> {
-    return this.repository.findOneBy({ user: { id } });
+  findById(id: string): Promise<IUserDetailDTO | undefined> {
+    return this.repository.findOne(id);
   }
 }
