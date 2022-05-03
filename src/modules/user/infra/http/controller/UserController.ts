@@ -5,7 +5,7 @@ import FindUserService from '../../../services/FindUserService';
 import UpdateUserService from '../../../services/UpdateUserService';
 import AuthenticateUserService from '../../../services/AuthenticateUserService';
 import CreateUserService from '../../../services/CreateUserService';
-import DeleteUserService from 'modules/user/services/DeleteUserService';
+import DeleteUserService from '../../../services/DeleteUserService';
 
 export default class UserController {
   async create(request: Request, response: Response): Promise<void> {

@@ -1,11 +1,10 @@
 import { Request, Response } from 'express';
 import { container } from 'tsyringe';
+import { UpdateRequestService } from '../../../services/UpdateRequestService';
 import { CreateRequestService } from '../../../services/CreateRequestService';
 import { ListRequestByUserService } from '../../../services/ListRequestByUserService';
-import IUserDTO from '../../../../user/dtos/IUserDTO';
 import { ListAllRequestsService } from '../../../services/ListAllRequestsService';
-import FindRequestService from 'modules/request/services/FindRequestService';
-import { UpdateRequestService } from 'modules/request/services/UpdateRequestService';
+import FindRequestService from '../../../services/FindRequestService';
 
 export class RequestController {
   async create(request: Request, response: Response): Promise<void> {

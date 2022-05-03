@@ -1,11 +1,10 @@
 import { Router } from 'express';
 import { celebrate, Segments } from 'celebrate';
+import updateRequestSchema from '../../../schemas/updateRequest.schema';
 import { RequestController } from '../controllers/RequestController';
 import { ensureAuthenticated } from '../../../../user/middlewares/ensureAuthenticated';
-import requestSchema from '../../../schemas/createRequest.schema';
-import { ensureAdmin } from '../../../../user/middlewares/ensureAdmin';
 import createRequestSchema from '../../../schemas/createRequest.schema';
-import updateRequestSchema from 'modules/request/schemas/updateRequest.schema';
+import { ensureAdmin } from '../../../../user/middlewares/ensureAdmin';
 
 const requestRoutes = Router();
 

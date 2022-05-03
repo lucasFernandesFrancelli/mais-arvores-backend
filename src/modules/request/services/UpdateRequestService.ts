@@ -1,7 +1,8 @@
-import { AppError } from 'shared/errors/AppError';
 import { inject, injectable } from 'tsyringe';
+
 import { IRequestDTO } from '../dtos/IRequestDTO';
 import { IRequestRepository } from '../repositories/IRequestRepository';
+import { AppError } from '../../../shared/errors/AppError';
 
 @injectable()
 export class UpdateRequestService {

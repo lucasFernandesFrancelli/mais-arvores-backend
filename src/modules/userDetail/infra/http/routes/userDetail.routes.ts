@@ -3,7 +3,7 @@ import { celebrate, Segments } from 'celebrate';
 import UserDetailController from '../controller/UserDetailController';
 import createUserDetailSchema from '../../../schemas/createUserDetail.schema';
 import { ensureAuthenticated } from '../../../../user/middlewares/ensureAuthenticated';
-import updateUserDetailSchema from 'modules/userDetail/schemas/updateUserDetail.schema';
+import updateUserDetailSchema from '../../../schemas/updateUserDetail.schema';
 
 const userDetailRoutes = Router();
 
