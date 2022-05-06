@@ -7,16 +7,16 @@ module.exports = {
   database: process.env.DB_NAME,
   synchronize: false,
   entities: [
-    './dist/src/modules/**/entities/**/*.{ts,js}',
-    './dist/src/shared/infra/typeorm/entities/**/*.{ts,js}',
+    './src/modules/**/entities/**/*.{ts,js}',
+    './src/shared/infra/typeorm/entities/**/*.{ts,js}',
   ],
-  migrations: [`./dist/src/shared/infra/typeorm/migrations/**/*.{ts,js}`],
+  migrations: [`./src/shared/infra/typeorm/migrations/**/*.{ts,js}`],
   cli: {
     entitiesDir: [
-      `./dist/src/modules/**/entities/**/*.{ts,js}`,
-      `./dist/src/shared/infra/typeorm/entities/**/*.{ts,js}`,
+      `./src/modules/**/entities/**/*.{ts,js}`,
+      `./src/shared/infra/typeorm/entities/**/*.{ts,js}`,
     ],
-    migrationsDir: `./dist/src/shared/infra/typeorm/migrations`,
+    migrationsDir: `./src/shared/infra/typeorm/migrations`,
   },
   autoLoadEntities: true,
 };

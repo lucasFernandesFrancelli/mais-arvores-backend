@@ -39,7 +39,7 @@ export class RequestController {
   }
 
   async update(request: Request, response: Response): Promise<void> {
-    const { data } = request.body;
+    const data = request.body;
     const { id } = request.params;
 
     const updateRequestService = container.resolve(UpdateRequestService);
