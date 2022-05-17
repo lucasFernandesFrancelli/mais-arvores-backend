@@ -4,6 +4,7 @@ const createUserDetailSchema = Joi.object({
   firstName: Joi.string().required(),
   lastName: Joi.string().required(),
   cpf: Joi.string().required(),
+  birthdate: Joi.date().required(),
   street: Joi.string().required(),
   neighborhood: Joi.string().required(),
   complement: Joi.string().optional(),

@@ -4,6 +4,7 @@ const updateUserDetailSchema = Joi.object({
   firstName: Joi.string().optional(),
   lastName: Joi.string().optional(),
   cpf: Joi.string().optional(),
+  birthdate: Joi.date().optional(),
   street: Joi.string().optional(),
   neighborhood: Joi.string().optional(),
   complement: Joi.string().optional(),

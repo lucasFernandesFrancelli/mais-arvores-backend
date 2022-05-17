@@ -5,6 +5,7 @@ export interface IUserDetailDTO extends IDefaultDTO {
   user: IUserDTO;
   firstName: string;
   lastName: string;
+  birthdate: Date;
   cpf: string;
   street: string;
   neighborhood: string;

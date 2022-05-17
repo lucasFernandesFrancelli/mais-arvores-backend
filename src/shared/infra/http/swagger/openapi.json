@@ -136,6 +136,7 @@
                   "firstName": { "type": "string" },
                   "lastName": { "type": "string" },
                   "cpf": { "type": "string" },
+                  "birthdate": { "type": "string" },
                   "street": { "type": "string" },
                   "city": { "type": "string" },
                   "neighborhood": { "type": "string" },
@@ -148,6 +149,7 @@
                   "city": "Cidade Exemplo",
                   "complement": null,
                   "cpf": "777.666.644-29",
+                  "birthdate": "2002-03-01",
                   "firstName": "Jorginho",
                   "lastName": "Silva",
                   "neighborhood": "Bairo exemplo",
@@ -245,6 +247,7 @@
                 "properties": {
                   "firstName": { "type": "string" },
                   "lastName": { "type": "string" },
+                  "birthdate": { "type": "date" },
                   "cpf": { "type": "string" },
                   "street": { "type": "string" },
                   "city": { "type": "string" },
@@ -257,6 +260,7 @@
                 "example": {
                   "city": "Cidade Exemplo",
                   "complement": "Casa B",
+                  "birthdate": "2002-03-01",
                   "cpf": "777.666.644-29",
                   "firstName": "Jorginho",
                   "lastName": "Silva",
@@ -901,6 +905,40 @@
         }
       }
     },
+    "/products/{id}/images/upload": {
+      "put": {
+        "tags": ["Produto"],
+        "summary": "Atualizar imagem do Produto",
+        "description": "Atualiza a imagem de um produto pelo ID - Usuário deve ser administrador",
+        "security": [{ "bearerAuth": [] }],
+        "parameters": [
+          {
+            "required": true,
+            "in": "path",
+            "name": "id",
+            "description": "Atualiza a imagem de um produto pelo ID especificado"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "image": { "type": "string" },
+                  "format": {"type": "binary"}
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": { "description": "Atualizado com sucesso" },
+          "500": { "description": "Erro interno do servidor" }
+        }
+      }
+    },
+
     "/request": {
       "post": {
         "tags": ["Pedidos"],

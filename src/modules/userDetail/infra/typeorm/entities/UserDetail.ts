@@ -19,6 +19,9 @@ export class UserDetail extends DefaultEntity implements IUserDetailDTO {
   @Column()
   cpf: string;
 
+  @Column()
+  birthdate: Date;
+
   @Column({ name: 'first_name' })
   firstName: string;
 
