@@ -18,7 +18,12 @@ export class RequestRepository implements IRequestRepository {
 
   findById(id: string): Promise<IRequestDTO | undefined> {
     return this.repository.findOne(id, {
-      relations: ['requestStatus', 'products'],
+      relations: [
+        'requestStatus',
+        'products',
+        'paymentMethod',
+        'products.product',
+      ],
     });
   }
 
