@@ -10,6 +10,12 @@ interface IAuthenticateRequest {
   email: string;
   password: string;
 }
+
+interface IAuthenticateReturn {
+  token: string;
+  isAdmin: boolean;
+}
+
 @injectable()
 export default class AuthenticateUserService {
   constructor(
@@ -21,7 +27,7 @@ export default class AuthenticateUserService {
     private tokenManagerProvider: ITokenManagerProvider,
   ) {}
 
-  async execute(data: IAuthenticateRequest) {
+  async execute(data: IAuthenticateRequest): Promise<IAuthenticateReturn> {
     const user = await this.userRepository.findByEmail(data.email);
 
     if (!user) {
@@ -41,9 +47,12 @@ export default class AuthenticateUserService {
 
     const apiConfig = api();
 
-    return this.tokenManagerProvider.sign({}, apiConfig.JWT_SECRET, {
-      subject: user.id,
-      expiresIn: '1d',
-    });
+    return {
+      token: await this.tokenManagerProvider.sign({}, apiConfig.JWT_SECRET, {
+        subject: user.id,
+        expiresIn: '1d',
+      }),
+      isAdmin: !!user.isAdmin,
+    };
   }
 }
