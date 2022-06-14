@@ -9,7 +9,7 @@ export default class UserDetailController {
   async create(request: Request, response: Response): Promise<void> {
     const data = request.body;
 
-    data.user = request.userId;
+    data.user.id = request.userId;
 
     const createUserDetailService = container.resolve(CreateUserDetailService);
 
