@@ -14,6 +14,7 @@ interface IAuthenticateRequest {
 interface IAuthenticateReturn {
   token: string;
   isAdmin: boolean;
+  hasDetail: boolean;
 }
 
 @injectable()
@@ -53,6 +54,7 @@ export default class AuthenticateUserService {
         expiresIn: '1d',
       }),
       isAdmin: !!user.isAdmin,
+      hasDetail: !!user.hasDetail,
     };
   }
 }
