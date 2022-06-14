@@ -16,7 +16,7 @@ export default class UserRepository implements IUserRepository {
     await this.repository.softDelete(id);
   }
 
-  async update(id: string, user: IUserDTO): Promise<void> {
+  async update(id: string, user: Partial<IUserDTO>): Promise<void> {
     await this.repository.update(id, user);
   }
 

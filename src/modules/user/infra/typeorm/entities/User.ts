@@ -24,6 +24,9 @@ export default class User extends DefaultEntity implements IUserDTO {
   @Column({ name: 'is_admin' })
   isAdmin: boolean;
 
+  @Column({ name: 'has_detail' })
+  hasDetail: boolean;
+
   constructor() {
     super();
     if (!this.id) {

@@ -6,4 +6,5 @@ export default interface IUserDTO extends IDefaultDTO {
   password: string;
   isActive?: boolean;
   isAdmin?: boolean;
+  hasDetail?: boolean;
 }
