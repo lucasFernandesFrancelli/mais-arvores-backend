@@ -19,7 +19,9 @@ export default class ProductController {
 
   async uploadImage(request: Request, response: Response, next: NextFunction) {
     try {
-      if (!request.file || !request.file.filename) {
+      const requestImage = request.file as Express.MulterS3.File;
+
+      if (!requestImage || !requestImage.location) {
         response.status(401).json({ response: `Not a valid file` });
         return;
       }
@@ -30,7 +32,7 @@ export default class ProductController {
       );
 
       response.json(
-        await updateProductImageService.execute(id, request.file.filename),
+        await updateProductImageService.execute(id, requestImage.location),
       );
     } catch (e) {
       next(e);

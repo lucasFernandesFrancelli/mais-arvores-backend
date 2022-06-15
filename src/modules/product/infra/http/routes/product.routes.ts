@@ -1,15 +1,16 @@
 import { Router } from 'express';
 import { celebrate, Segments } from 'celebrate';
-import multer from 'multer';
 import ProductController from '../controller/ProductController';
 import { ensureAdmin } from '../../../../user/middlewares/ensureAdmin';
 import { ensureAuthenticated } from '../../../../user/middlewares/ensureAuthenticated';
-import { uploadImage } from '../../../../../shared/infra/http/middleware/upload/image';
+import _multer from '../../../../../shared/infra/http/middleware/upload/image';
 import productSchema from '../../../schema/createProduct.schema';
 
 const productRoutes = Router();
 
 const productController = new ProductController();
+
+const multer = _multer(2048, ['jpg', 'png', 'jpeg']);
 
 productRoutes.post(
   '',
@@ -23,7 +24,7 @@ productRoutes.post(
   '/:id/images/upload',
   ensureAuthenticated,
   ensureAdmin,
-  multer(uploadImage.getConfig).single('product'),
+  multer.single('product'),
   productController.uploadImage,
 );
 
