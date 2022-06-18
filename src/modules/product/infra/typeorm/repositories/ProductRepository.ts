@@ -13,7 +13,7 @@ export class ProductRepository implements IProductRepository {
   }
 
   findById(id: string): Promise<IProductDTO | undefined | null> {
-    return this.repository.findOne({ id });
+    return this.repository.findOne(id, { relations: ['category'] });
   }
 
   findByName(description: string): Promise<IProductDTO | undefined | null> {
