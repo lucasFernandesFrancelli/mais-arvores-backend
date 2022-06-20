@@ -24,6 +24,7 @@ export class RequestRepository implements IRequestRepository {
         'paymentMethod',
         'products.product',
       ],
+      withDeleted: true,
     });
   }
 
@@ -36,6 +37,7 @@ export class RequestRepository implements IRequestRepository {
         'products.product',
         'requestStatus',
       ],
+      withDeleted: true,
     });
   }
 
@@ -57,6 +59,7 @@ export class RequestRepository implements IRequestRepository {
         'paymentMethod',
         'user',
       ],
+      withDeleted: true,
     });
   }
 }
