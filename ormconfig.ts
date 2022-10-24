@@ -1,4 +1,4 @@
-console.log(process.env.DB_DIALECT);
+
 
 module.exports = {
   type: process.env.DB_DIALECT,
